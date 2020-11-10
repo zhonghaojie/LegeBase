@@ -76,4 +76,5 @@ dependencies {
     api libs.okhttp311_logging
     api libs.okhttp311
     api libs.okhttp311_urlconnection
+    api libs.recyclerview
 }
