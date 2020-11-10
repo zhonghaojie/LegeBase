@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/iflyos_title_root"
+	android:background="@color/black"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ImageView
+		android:id="@+id/iv_back"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/x33"
+		android:paddingTop="@dimen/y29"
+		android:paddingEnd="@dimen/x33"
+		android:paddingBottom="@dimen/y29"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		android:src="@drawable/ic_left_arrow_white" />
+
+
+	<TextView
+		android:id="@+id/tv_title"
+		android:layout_width="@dimen/x500"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:textSize="@dimen/x28"
+		android:textColor="#fff"
+		app:layout_constraintTop_toTopOf="@+id/iv_back"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintBottom_toBottomOf="@+id/iv_back"
+		app:layout_constraintEnd_toEndOf="parent"
+		android:lines="1"
+		android:ellipsize="end"
+		android:text="标题" />
+
+
+
+</android.support.constraint.ConstraintLayout>

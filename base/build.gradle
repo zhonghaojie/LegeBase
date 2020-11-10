@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+group = 'com.github.zhonghaojie'
+buildscript {
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1' // Add this line
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+android {
+    compileSdkVersion versions.android_compile_sdk
+
+    defaultConfig {
+        minSdkVersion versions.android_min_sdk
+        targetSdkVersion versions.android_target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api libs.support_v4
+    api libs.appcompat_v7
+    implementation libs.logger
+    //下载框架
+    implementation libs.filedownloader
+    implementation libs.anko_common
+    api libs.fastjson
+
+    //fragment的第三方封装库
+    api libs.fragmentation
+    api libs.fragmentation_swipeback
+    api libs.toast
+    //图片处理
+    api libs.glide_transformations
+    annotationProcessor libs.glide_compiler
+    api libs.glide
+    api libs.glide_okhttp3
+    api libs.constraintLayout
+
+    //retrofit2网络框架
+    api libs.retrofit2
+    api libs.retrofit_converter
+    api libs.converter_scalars
+    api libs.converter_gson
+
+    api libs.design
+    api libs.eventbus
+    //手势返回Activity
+    api libs.swipebacklayout
+    api libs.MPAndroidChart
+    api libs.okio
+    api libs.okhttp311_logging
+    api libs.okhttp311
+    api libs.okhttp311_urlconnection
+}

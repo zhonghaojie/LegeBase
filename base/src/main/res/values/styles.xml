@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<!--无边框-->
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowBackground">@color/black</item>
+		<item name="windowActionBar">false</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="colorPrimary">@android:color/transparent</item>
+		<item name="colorPrimaryDark">@android:color/transparent</item>
+		<item name="colorAccent">@android:color/transparent</item>
+		<!--        <item name="android:windowIsTranslucent">true</item>-->
+	</style>
+	<style name="statusbar_pop_animation" parent="android:Animation">
+		<item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
+		<item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
+	</style>
+</resources>

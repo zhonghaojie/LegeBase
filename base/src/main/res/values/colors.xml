@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="btn_login_normal">#00acff</color>
+
+    <color name="black">#ff000000</color>
+    <color name="black_333">#333333</color>
+    <color name="black_deep">#292929</color>
+    <color name="chat_button_normal_color">#C1C1C1</color>
+    <color name="chat_button_select_color">#547BCF</color>
+
+    <color name="globaltime_day_color">#FF547BCF</color>
+    <color name="globaltime_night_color">#273A52</color>
+
+    <color name="color_lock_bg">#00000000</color>
+    <color name="color_lock_bg2">#cc000000</color>
+
+    <color name="color_moxie">#9E5E47</color>
+    <color name="color_sheshou">#2A9292</color>
+    <color name="color_tiancheng">#516587</color>
+    <color name="color_tianxie">#9C608D</color>
+    <color name="color_chunv">#D481B0</color>
+    <color name="color_juxie">#CF773C</color>
+    <color name="color_baiyang">#E77192</color>
+    <color name="color_jinniu">#976641</color>
+    <color name="color_shuiping">#3F9DA0</color>
+    <color name="color_shuangzi">#41807E</color>
+    <color name="color_shuangyu">#CC6C69</color>
+    <color name="color_shizi">#B98447</color>
+    <color name="option_tertiary_color">#FFD377</color>
+
+    <color name="originalcolor">#331065b5</color>
+    <color name="qualitycolor">#FF79FE15</color>
+
+    <color name="qualitycolor_youzhi">#79FE15</color>
+    <color name="qualitycolor_lianghao">#DAEA2B</color>
+    <color name="qualitycolor_qingdu">#E1CA36</color>
+    <color name="qualitycolor_zhong">#E17E62</color>
+    <color name="qualitycolor_zhongdu">#D33A3C</color>
+    <color name="qualitycolor_yanzhong">#6332CA</color>
+
+    <color name="stock_height_color">#F84D4D</color>
+    <color name="stock_low_color">#2BC12A</color>
+    <color name="color_bg_perpetual_calendar">#fffcf9f4</color>
+    <color name="txt_color_calendar">#333333</color>
+    <color name="color_gray_line">#ffe8e3da</color>
+    <color name="white">#fff</color>
+    <color name="white_88">#88ffffff</color>
+    <color name="white_66">#66ffffff</color>
+    <color name="white_cc">#ccffffff</color>
+    <color name="txt_color_orange">#EE861A</color>
+    <color name="star_cover_color">#FFAC2D</color>
+    <color name="color_rating_bg">#CCCCCC</color>
+    <color name="windowBackground">#0f1722</color>
+
+    <color name="color_edit">#547BCF</color>
+	<color name="color_task_bg">@color/color_normal_dark_background</color>
+
+    <color name="color_address_book_title">#6A6C72</color>
+    <color name="top_contacts_operation">#333333</color>
+    <color name="recyclerview_departments_blue">#3753AE</color>
+    <color name="recyclerview_departments_lowblue">#2F84DC</color>
+    <color name="recyclerview_departments_green">#00A18D</color>
+    <color name="recyclerview_item_deep_grey">#323C50</color>
+    <color name="recyclerview_departments_blue_text">#2C4490</color>
+    <color name="recyclerview_departments_green_text">#0A8071</color>
+    <color name="recyclerview_departments_grey_text">#272F3E</color>
+
+    <color name="setting_text">#FFFFFF</color>
+    <color name="setting_line">#506874</color>
+    <color name="setting_bg">#131F35</color>
+    <color name="setting_bg_select">#1C2E4E</color>
+    <color name="setting_bg_reboot_device">#81B1FF</color>
+
+    <color name="email_message_bg">@color/color_normal_dark_background</color>
+
+
+    <color name="color_tip">#979797</color>
+    <color name="color_email_no_delete">#888A8E</color>
+    <color name="color_airbg">#E8EDEF</color>
+
+    <color name="stock_up_red">#D81920</color>
+    <color name="stock_down_green">#3AC74A</color>
+    <color name="color_update_pop_text">#80ffffff</color>
+
+    <color name="color_window_statu_text">#E6ffffff</color>
+
+<!--    蓝牙升降桌控制页面-->
+    <color name="color_ble_desk_btn_pressed">#2E80EB</color>
+    <color name="color_ble_desk_btn_pressed_2">#458deb</color>
+    <color name="color_video_title_text_playing">#5FA4FE</color>
+
+    <color name="color_ble_next_btn_1">#2E80EB</color>
+    <color name="color_ble_next_btn_2">#0558C4</color>
+
+
+    <color name="HIGH_TEMP_HEAVY">#557A3913</color>
+    <color name="HIGH_TEMP_LIGHT">#227A3913</color>
+    <color name="SNOW_HEAVY">#5530364B</color>
+    <color name="SNOW_LIGHT">#2230364B</color>
+    <color name="RAIN_HEAVY">#553C3C3C</color>
+    <color name="RAIN_LIGHT">#223C3C3C</color>
+    <color name="SUNNY_HEAVY">#553C3C3C</color>
+    <color name="SUNNY_LIGHT">#223C3C3C</color>
+    <color name="FOG_HEAVY">#55313147</color>
+    <color name="FOG_LIGHT">#22313147</color>
+    <color name="CLOUDY_HEAVY">#55313147</color>
+    <color name="CLOUDY_LIGHT">#22313147</color>
+    <color name="SMOG_HEAVY">#555A4746</color>
+    <color name="SMOG_LIGHT">#225A4746</color>
+    
+    
+    <color name="HIGH_TEMP_COLOR">#267A3913</color>
+    <color name="SNOW_COLOR">#59595959</color>
+    <color name="RAIN_COLOR">#26565454</color>
+    <color name="SUNNY_COLOR">#59565454</color>
+    <color name="FOG_COLOR">#595C5C82</color>
+    <color name="CLOUDY_COLOR">#595C5C82</color>
+    <color name="SMOG_COLOR">#597A3913</color>
+	<color name="color_normal_dark_background">#12151E</color>
+    <color name="color_play_list_index_bg">#3C60A8</color>
+    <color name="color_play_list_index_bg_playing">#D7E8FF</color>
+    <color name="color_play_list_bg_playing">#2D7FEA</color>
+    <color name="color_play_list_tv_color_not_playing">#ADD1FF</color>
+
+    <color name="color_vp_date">#9D9D9D</color>
+    <color name="color_date_event_line">#4D979797</color>
+    <color name="color_date_event">#4D979797</color>
+    <color name="color_date_yellow">#FFB335</color>
+    <color name="color_date_blue">#2E80EB</color>
+    <color name="color_focus_activity">#0D0C17</color>
+    <color name="color_focus_activity_alph">#11CACACA</color>
+    <color name="color_black333">#333333</color>
+    <color name="color_999">#999999</color>
+    <color name="color_white_ca">#CACACA</color>
+	<color name="color_666">#666666</color>
+
+
+    <color name="white_30">#4Dffffff</color>
+    <color name="white_50">#80ffffff</color>
+    <color name="white_10">#22ffffff</color>
+    <color name="white_60">#81ffffff</color>
+    <color name="white_70">#B3ffffff</color>
+    <color name="white_80">#B4ffffff</color>
+    <color name="color_line_54">#545458</color>
+	<color name="color_helper_bg">#152239</color>
+	<color name="white_8p">#14FFFFFF</color>
+
+    <color name="lrc_normal_text_color">#9E9E9E</color>
+    <color name="lrc_current_text_color">#FF4081</color>
+    <color name="lrc_timeline_text_color">#F8BBD0</color>
+    <color name="lrc_timeline_color">#809E9E9E</color>
+    <color name="lrc_time_text_color">#809E9E9E</color>
+</resources>
