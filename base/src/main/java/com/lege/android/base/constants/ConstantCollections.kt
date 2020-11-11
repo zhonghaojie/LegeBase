@@ -191,6 +191,11 @@ class SettingConstant {
 
         //天气自动播报是否有提醒过用户
         const val WEATHER_TTS_IS_ON_IS_REMIND = "weather_tts_is_on_is_remind"
+
+        //儿童模式
+        const val CHILDREN_MODEL = "CHILDREN_MODEL"
+        //儿童模式 通讯录界面提醒是否展示
+        const val CHILDREN_ADDRESSBOOK_TIP = "CHILDREN_ADDRESSBOOK_TIP"
     }
 }
 
@@ -509,3 +514,10 @@ class LearnConstant {
         const val FACEDAY = "face_day"
     }
 }
+
+
+
+
+
+
+
