@@ -258,6 +258,8 @@ class VersionConstant {
 
 class BleDeviceConstant {
     companion object {
+        //是否开启久坐提醒播报
+        const val SIT_REMIND_TTS_IS_ON = "sit_remind_tts_is_on"
         //蓝牙设备
         const val ALL = "all"
 
