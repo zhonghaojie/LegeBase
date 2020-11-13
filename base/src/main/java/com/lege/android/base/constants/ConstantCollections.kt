@@ -8,6 +8,20 @@ import com.lege.android.base.string.DateFormatUtil
  * Created by zhonghaojie on 2020-04-10.
  */
 
+class TaskConstants{
+    companion object{
+        const val TASK_ALARM = "alarm"
+        const val TASK_REMIND = "remind"
+        const val TASK_SCHEDULE = "schedule"
+        const val TASK_PLAN = "plan"
+
+        const val TASK_STATE_FINISH = "finish"//已完成
+        const val TASK_STATE_DELAY = "delay"
+        const val TASK_STATE_DEL = "del"//删除
+        const val TASK_STATE_NORMAL = "normal"
+    }
+
+}
 
 class TomatoConstants {
     companion object {

@@ -1,7 +1,12 @@
-package com.lege.launcher.db
+package com.lege.android.base.db
 
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_ALARM
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_PLAN
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_REMIND
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_SCHEDULE
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_STATE_FINISH
+import com.lege.android.base.constants.TaskConstants.Companion.TASK_STATE_NORMAL
 import com.lege.android.base.string.DateFormatUtil
-import com.lege.launcher.apapter.*
 
 /**
  * Description:

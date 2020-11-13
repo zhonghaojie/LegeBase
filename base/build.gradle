@@ -25,7 +25,7 @@ android {
     }
     greendao {
         schemaVersion 22
-        daoPackage 'com.lege.launcher.db'
+        daoPackage 'com.lege.android.db'
         targetGenDir 'src/main/java'
         //schemaVersion--> 指定数据库schema版本号，迁移等操作会用到;
         //daoPackage --> dao的包名，包名默认是entity所在的包；

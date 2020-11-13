@@ -1,8 +1,9 @@
-package com.lege.launcher.db
+package com.lege.android.base.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.lege.android.base.log.APPLog
+import com.lege.android.db.*
 import org.greenrobot.greendao.database.Database
 
 

@@ -1,8 +1,31 @@
 package com.lege.android.base.db;
 
+import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.lege.android.base.PreferencesManager;
 import com.lege.android.base.log.APPLog;
 import com.lege.android.base.string.DateFormatUtil;
-import com.lege.launcher.application.MyAPP;
+import com.lege.android.db.AlarmUserDao;
+import com.lege.android.db.AudioRecordUserDao;
+import com.lege.android.db.CollectionUserDao;
+import com.lege.android.db.DaoMaster;
+import com.lege.android.db.DaoSession;
+import com.lege.android.db.EmailMessageUserDao;
+import com.lege.android.db.EmailUserDao;
+import com.lege.android.db.GlobalClockUserDao;
+import com.lege.android.db.MessageUserDao;
+import com.lege.android.db.MissedCallRecordUserDao;
+import com.lege.android.db.NewsUserDao;
+import com.lege.android.db.NoticeUserDao;
+import com.lege.android.db.PlanUserDao;
+import com.lege.android.db.RecentlyPlayedUserDao;
+import com.lege.android.db.ReminderUserDao;
+import com.lege.android.db.ScheduleUserDao;
+import com.lege.android.db.TaskBeanDao;
+import com.lege.android.db.UserDao;
+import com.lege.android.db.WallpaperUserDao;
+import com.lege.android.db.WeatherUserDao;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,21 +34,89 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_ALARM;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_PLAN;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_REMIND;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_SCHEDULE;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_STATE_DEL;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_STATE_DELAY;
-import static com.lege.launcher.apapter.TaskManagerListAdapterKt.TASK_STATE_NORMAL;
+import static com.lege.android.base.constants.TaskConstants.TASK_ALARM;
+import static com.lege.android.base.constants.TaskConstants.TASK_PLAN;
+import static com.lege.android.base.constants.TaskConstants.TASK_REMIND;
+import static com.lege.android.base.constants.TaskConstants.TASK_SCHEDULE;
+import static com.lege.android.base.constants.TaskConstants.TASK_STATE_DEL;
+import static com.lege.android.base.constants.TaskConstants.TASK_STATE_DELAY;
+import static com.lege.android.base.constants.TaskConstants.TASK_STATE_NORMAL;
+
 
 /**
  * Created by zhoushaoqing on 18-10-23.
  */
 
 public class DBHelper {
-    private static DBHelper instance;
+    private DaoMasterHelper masterHelper;
+    private SQLiteDatabase db;
+    private DaoMaster mDaoMaster;
+    private DaoSession mDaoSession;
 
+    /**
+     * 设置greenDao
+     */
+    public void setDatabase() {
+        // 通过 DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的 SQLiteOpenHelper 对象。
+        // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
+        // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
+        // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
+        /*mHelper = new DaoMaster.DevOpenHelper(this, "lege-db", null);
+        db = mHelper.getWritableDatabase();*/
+        masterHelper = new DaoMasterHelper(context, "lege-db", null);
+        db = masterHelper.getWritableDatabase();
+        // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+
+        if (!PreferencesManager.getInstance().getBooleanResults2("is_transfer_db12", false)) {
+            new Thread() {
+                @Override
+                public void run() {
+                    new UpgradeTo12().transfer();
+                    PreferencesManager.getInstance().saveBooleanResults("is_transfer_db12", true);
+                }
+            }.start();
+        }
+        if (!PreferencesManager.getInstance().getBooleanResults2("isdb_13_to_14", false)) {
+            List<TaskBean> list = DBHelper.getInstance().getTaskBeanDao().loadAll();
+            for (TaskBean taskBean : list) {
+                if (taskBean.getDatetime() != null) {
+                    taskBean.setDate(taskBean.getDatetime().split(" ")[0]);
+                }
+
+                DBHelper.getInstance().updateTaskBean(taskBean);
+            }
+            PreferencesManager.getInstance().saveBooleanResults("isdb_13_to_14", true);
+        }
+
+    }
+
+    public DaoSession getDaoSession() {
+        return mDaoSession;
+    }
+
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
+
+    public void deleSQL() {
+        SQLiteDatabase db = masterHelper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        DaoMaster.dropAllTables(daoMaster.getDatabase(), true);
+        DaoMaster.createAllTables(daoMaster.getDatabase(), true);
+    }
+
+
+
+
+    private static DBHelper instance;
+    private Application context;
+    public void initContext(Application context){
+        this.context = context;
+    }
     public static DBHelper getInstance() {
         if (instance == null) {
             instance = new DBHelper();
@@ -212,21 +303,21 @@ public class DBHelper {
     }
 
     private AudioRecordUserDao getAudioRecordDao(){
-        return MyAPP.getAppContext().getDaoSession().getAudioRecordUserDao();
+        return mDaoSession.getAudioRecordUserDao();
     }
     /**
      * 获取 getUserDao
      */
     private UserDao getUserDao() {
 
-        return MyAPP.getAppContext().getDaoSession().getUserDao();
+        return mDaoSession.getUserDao();
     }
 
     /**
      * 获取 CollectionUserDao
      */
     private CollectionUserDao getCollectionUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getCollectionUserDao();
+        return mDaoSession.getCollectionUserDao();
     }
 
 
@@ -234,7 +325,7 @@ public class DBHelper {
      * 获取 PlanUserDao
      */
     public PlanUserDao getPlanUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getPlanUserDao();
+        return mDaoSession.getPlanUserDao();
     }
 
     /**
@@ -319,7 +410,7 @@ public class DBHelper {
      * 获取 MessageUserDao
      */
     private MessageUserDao getMessageUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getMessageUserDao();
+        return mDaoSession.getMessageUserDao();
     }
 
     /**
@@ -422,53 +513,53 @@ public class DBHelper {
      * 获取 GlobalClockUserDao
      */
     private GlobalClockUserDao getGlobalClockUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getGlobalClockUserDao();
+        return mDaoSession.getGlobalClockUserDao();
     }
 
     /**
      * 获取 WeatherUserDao
      */
     public WeatherUserDao getWeatherUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getWeatherUserDao();
+        return mDaoSession.getWeatherUserDao();
     }
 
     /**
      * 获取 WallpaperUser
      */
     public WallpaperUserDao getWallpaperUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getWallpaperUserDao();
+        return mDaoSession.getWallpaperUserDao();
     }
 
     /**
      * 获取 EmailUserDao
      */
     public EmailUserDao getEmailUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getEmailUserDao();
+        return mDaoSession.getEmailUserDao();
     }
 
     /**
      * 获取 EmailMessageUserDao
      */
     public EmailMessageUserDao getEmailMessageUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getEmailMessageUserDao();
+        return mDaoSession.getEmailMessageUserDao();
     }
 
     public TaskBeanDao getTaskBeanDao() {
-        return MyAPP.getAppContext().getDaoSession().getTaskBeanDao();
+        return mDaoSession.getTaskBeanDao();
     }
 
     /**
      * 获取服务通知、公司公告NoticeUserDao
      */
     public NoticeUserDao getNoticeUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getNoticeUserDao();
+        return mDaoSession.getNoticeUserDao();
     }
 
     /**
      * 获取未接电话MissedCallRecordUserDao
      */
     public MissedCallRecordUserDao getMissedCallRecordUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getMissedCallRecordUserDao();
+        return mDaoSession.getMissedCallRecordUserDao();
     }
 
     /**
@@ -524,21 +615,21 @@ public class DBHelper {
      * 获取 EmailMessageUserDao
      */
     public AlarmUserDao getAlarmUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getAlarmUserDao();
+        return mDaoSession.getAlarmUserDao();
     }
 
     /**
      * 获取 ScheduleUserDao
      */
     public ScheduleUserDao getScheduleUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getScheduleUserDao();
+        return mDaoSession.getScheduleUserDao();
     }
 
     /**
      * 获取 ReminderUserDao
      */
     private ReminderUserDao getReminderUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getReminderUserDao();
+        return mDaoSession.getReminderUserDao();
     }
 
     /**
@@ -912,7 +1003,7 @@ public class DBHelper {
      * 获取 NewsUserDao
      */
     private NewsUserDao getNewsUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getNewsUserDao();
+        return mDaoSession.getNewsUserDao();
     }
 
     /**
@@ -1436,7 +1527,7 @@ public class DBHelper {
      * 获取 getRecentlyPlayedUserDao
      */
     private RecentlyPlayedUserDao getRecentlyPlayedUserDao() {
-        return MyAPP.getAppContext().getDaoSession().getRecentlyPlayedUserDao();
+        return mDaoSession.getRecentlyPlayedUserDao();
     }
 
     /**
