@@ -210,6 +210,9 @@ class SettingConstant {
         const val CHILDREN_MODEL = "CHILDREN_MODEL"
         //儿童模式 通讯录界面提醒是否展示
         const val CHILDREN_ADDRESSBOOK_TIP = "CHILDREN_ADDRESSBOOK_TIP"
+
+        //独立屏的主题
+        const val SH004_THEME = "new_theme"
     }
 }
 
@@ -243,6 +246,9 @@ class LocalDataKeyConstant {
 
         //相册屏保
         const val FAMILY_ALBUM = "FAMILY_ALBUM"
+        //是否是内容咨询点击进入，用于判断是否上传屏端埋点信息
+        const val BURYING_POINT = "BURYING_POINT"
+        const val BURYING_POINT_TIME = "BURYING_POINT_TIME"
     }
 }
 
