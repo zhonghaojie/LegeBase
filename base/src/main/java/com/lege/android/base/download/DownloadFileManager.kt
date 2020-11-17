@@ -116,6 +116,15 @@ object DownloadFileManager {
     }
 
 
+    fun downloadFile(url:String,localPath:String,listener:FileDownloadListener){
+        val task = FileDownloader.getImpl()
+            .create(url)
+            .setAutoRetryTimes(3)
+            .setPath(localPath)
+            .setCallbackProgressMinInterval(1000)
+            .setListener(listener)
+        task.start()
+    }
     fun pause() {
         if (taskID != -1) {
             FileDownloader.getImpl().pause(taskID)

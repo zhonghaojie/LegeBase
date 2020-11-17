@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:gravity="center_horizontal"
-	android:background="@drawable/pic_remind"
-	android:paddingStart="@dimen/x45"
-	android:paddingEnd="@dimen/x45"
-	android:paddingBottom="@dimen/y20"
-	android:paddingTop="@dimen/y20"
-	xmlns:tools="http://schemas.android.com/tools">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-	<ImageView
-		android:id="@+id/img_setup"
-		android:layout_width="@dimen/x80"
-		android:layout_height="@dimen/y80"
-		android:src="@drawable/icon_warning"/>
+    <ImageView
+        android:layout_width="@dimen/x620"
+        android:layout_height="@dimen/y340"
+        android:src="@drawable/pic_remind" />
 
-	<com.lege.android.base.view.AdjustTextView
-		android:id="@+id/tv_title"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/y20"
-		android:textColor="@color/white"
-		android:textSize="@dimen/x32"
-		tools:text="标题"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/x45"
+        android:paddingTop="@dimen/y20"
+        android:paddingEnd="@dimen/x45"
+        android:paddingBottom="@dimen/y20">
 
-	<TextView
-		android:id="@+id/tv_content"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textColor="#9BA1AC"
-		android:textSize="@dimen/x24"
-		android:gravity="center"
-		android:layout_marginTop="@dimen/y20"
-		android:layout_marginStart="@dimen/x15"
-		android:layout_marginEnd="@dimen/x15"
-		tools:text="内容" />
+        <ImageView
+            android:id="@+id/img_setup"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80"
+            android:src="@drawable/icon_warning" />
 
-	<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/y34"
-		android:orientation="horizontal">
+        <com.lege.android.base.view.AdjustTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x32"
+            tools:text="标题" />
 
-		<TextView
-			android:id="@+id/tv_refuse"
-			android:layout_width="@dimen/x250"
-			android:layout_height="@dimen/y70"
-			android:background="@drawable/bg_setting_pop_refuse"
-			android:gravity="center"
-			tools:text="取消"
-			android:textColor="@color/white"
-			android:textSize="@dimen/x28"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x15"
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginEnd="@dimen/x15"
+            android:gravity="center"
+            android:textColor="#9BA1AC"
+            android:textSize="@dimen/x24"
+            tools:text="内容" />
 
-		<TextView
-			android:id="@+id/tv_allow"
-			android:layout_width="@dimen/x250"
-			android:layout_height="@dimen/y70"
-			android:background="@drawable/shape_children_btn_bg"
-			android:gravity="center"
-			tools:text="确定"
-			android:textColor="#1F2338"
-			android:textSize="@dimen/x28"
-			android:layout_marginStart="@dimen/x30"/>
-	</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y34"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_refuse"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y70"
+                android:background="@drawable/bg_setting_pop_refuse"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x28"
+                tools:text="取消" />
+
+            <TextView
+                android:id="@+id/tv_allow"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y70"
+                android:layout_marginStart="@dimen/x30"
+                android:background="@drawable/shape_children_btn_bg"
+                android:gravity="center"
+                android:textColor="#1F2338"
+                android:textSize="@dimen/x28"
+                tools:text="确定" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

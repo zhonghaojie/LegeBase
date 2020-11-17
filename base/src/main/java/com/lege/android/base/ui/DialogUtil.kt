@@ -65,7 +65,7 @@ object DialogUtil {
                 dialog.dismiss()
                 onOk.invoke(dialog)
             }
-            dialog.show()
+
             val window = dialog.window
             val lp = window.attributes
             lp.width = width
@@ -74,6 +74,7 @@ object DialogUtil {
             lp.dimAmount = 0.75f
             window.attributes = lp
             window.setBackgroundDrawableResource(R.color.color_lock_bg)
+            dialog.show()
         }
     }
 
@@ -122,7 +123,7 @@ object DialogUtil {
                 dialog.dismiss()
                 onOk.invoke(dialog)
             }
-            dialog.show()
+
             val window = dialog.window
             val lp = window.attributes
             lp.width = width
@@ -131,6 +132,7 @@ object DialogUtil {
             lp.dimAmount = 0.75f
             window.attributes = lp
             window.setBackgroundDrawableResource(R.color.color_lock_bg)
+            dialog.show()
         }
     }
 
@@ -178,7 +180,7 @@ object DialogUtil {
                     }
                 }
             }, 0, 2000)
-            dialog.show()
+
             val window = dialog.window
             val lp = window.attributes
             lp.gravity= Gravity.CENTER
@@ -188,6 +190,7 @@ object DialogUtil {
             lp.dimAmount = 0.75f
             window.attributes = lp
             window.setBackgroundDrawableResource(R.color.color_lock_bg)
+            dialog.show()
         }
     }
 
@@ -240,7 +243,7 @@ object DialogUtil {
                     onTimer?.invoke(btnOk,tvContent, timer)
                 }
             }, 0, 1000)
-            dialog.show()
+
             val window = dialog.window
             val lp = window.attributes
             lp.gravity= Gravity.CENTER
@@ -250,6 +253,7 @@ object DialogUtil {
             lp.dimAmount = 0.75f
             window.attributes = lp
             window.setBackgroundDrawableResource(R.color.color_lock_bg)
+            dialog.show()
         }
     }
     //儿童番茄的确认弹窗
@@ -297,7 +301,7 @@ object DialogUtil {
                 dialog.dismiss()
                 onOk.invoke(dialog)
             }
-            dialog.show()
+
             val window = dialog.window
             val lp = window.attributes
             lp.width = width
@@ -306,6 +310,7 @@ object DialogUtil {
             lp.dimAmount = 0.75f
             window.attributes = lp
             window.setBackgroundDrawableResource(R.color.color_lock_bg)
+            dialog.show()
         }
     }
 }
