@@ -302,13 +302,13 @@ public class DBHelper {
         }
     }
 
-    private AudioRecordUserDao getAudioRecordDao(){
+    public AudioRecordUserDao getAudioRecordDao(){
         return mDaoSession.getAudioRecordUserDao();
     }
     /**
      * 获取 getUserDao
      */
-    private UserDao getUserDao() {
+    public UserDao getUserDao() {
 
         return mDaoSession.getUserDao();
     }
@@ -316,7 +316,7 @@ public class DBHelper {
     /**
      * 获取 CollectionUserDao
      */
-    private CollectionUserDao getCollectionUserDao() {
+    public CollectionUserDao getCollectionUserDao() {
         return mDaoSession.getCollectionUserDao();
     }
 
@@ -409,7 +409,7 @@ public class DBHelper {
     /**
      * 获取 MessageUserDao
      */
-    private MessageUserDao getMessageUserDao() {
+    public MessageUserDao getMessageUserDao() {
         return mDaoSession.getMessageUserDao();
     }
 
@@ -512,7 +512,7 @@ public class DBHelper {
     /**
      * 获取 GlobalClockUserDao
      */
-    private GlobalClockUserDao getGlobalClockUserDao() {
+    public GlobalClockUserDao getGlobalClockUserDao() {
         return mDaoSession.getGlobalClockUserDao();
     }
 
@@ -628,7 +628,7 @@ public class DBHelper {
     /**
      * 获取 ReminderUserDao
      */
-    private ReminderUserDao getReminderUserDao() {
+    public ReminderUserDao getReminderUserDao() {
         return mDaoSession.getReminderUserDao();
     }
 
@@ -1002,7 +1002,7 @@ public class DBHelper {
     /**
      * 获取 NewsUserDao
      */
-    private NewsUserDao getNewsUserDao() {
+    public NewsUserDao getNewsUserDao() {
         return mDaoSession.getNewsUserDao();
     }
 
@@ -1526,7 +1526,7 @@ public class DBHelper {
     /**
      * 获取 getRecentlyPlayedUserDao
      */
-    private RecentlyPlayedUserDao getRecentlyPlayedUserDao() {
+    public RecentlyPlayedUserDao getRecentlyPlayedUserDao() {
         return mDaoSession.getRecentlyPlayedUserDao();
     }
 
