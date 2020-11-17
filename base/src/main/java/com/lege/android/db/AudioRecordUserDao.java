@@ -30,6 +30,7 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
         public final static Property Duration = new Property(3, long.class, "duration", false, "DURATION");
         public final static Property IsUpload = new Property(4, boolean.class, "isUpload", false, "IS_UPLOAD");
         public final static Property FileSize = new Property(5, long.class, "fileSize", false, "FILE_SIZE");
+        public final static Property Name = new Property(6, String.class, "name", false, "NAME");
     };
 
 
@@ -50,7 +51,8 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
                 "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 2: recordID
                 "\"DURATION\" INTEGER NOT NULL ," + // 3: duration
                 "\"IS_UPLOAD\" INTEGER NOT NULL ," + // 4: isUpload
-                "\"FILE_SIZE\" INTEGER NOT NULL );"); // 5: fileSize
+                "\"FILE_SIZE\" INTEGER NOT NULL ," + // 5: fileSize
+                "\"NAME\" TEXT);"); // 6: name
     }
 
     /** Drops the underlying database table. */
@@ -72,6 +74,11 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
         stmt.bindLong(4, entity.getDuration());
         stmt.bindLong(5, entity.getIsUpload() ? 1L: 0L);
         stmt.bindLong(6, entity.getFileSize());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(7, name);
+        }
     }
 
     @Override
@@ -87,6 +94,11 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
         stmt.bindLong(4, entity.getDuration());
         stmt.bindLong(5, entity.getIsUpload() ? 1L: 0L);
         stmt.bindLong(6, entity.getFileSize());
+ 
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(7, name);
+        }
     }
 
     @Override
@@ -102,7 +114,8 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
             cursor.getLong(offset + 2), // recordID
             cursor.getLong(offset + 3), // duration
             cursor.getShort(offset + 4) != 0, // isUpload
-            cursor.getLong(offset + 5) // fileSize
+            cursor.getLong(offset + 5), // fileSize
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // name
         );
         return entity;
     }
@@ -115,6 +128,7 @@ public class AudioRecordUserDao extends AbstractDao<AudioRecordUser, Long> {
         entity.setDuration(cursor.getLong(offset + 3));
         entity.setIsUpload(cursor.getShort(offset + 4) != 0);
         entity.setFileSize(cursor.getLong(offset + 5));
+        entity.setName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

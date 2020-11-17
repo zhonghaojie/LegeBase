@@ -491,6 +491,38 @@ class DaoMasterHelper(context: Context, name: String, factory: SQLiteDatabase.Cu
                         RecentlyPlayedUserDao::class.java
                 )
             }
+            newVersion <= 23->{
+                //录音表增加name字段
+                MigrationHelper.migrate(db, object : MigrationHelper.ReCreateAllTableListener {
+                    override fun onCreateAllTables(db: Database, ifNotExists: Boolean) {
+                        DaoMaster.createAllTables(db, ifNotExists)
+                    }
+
+                    override fun onDropAllTables(db: Database, ifExists: Boolean) {
+                        DaoMaster.dropAllTables(db, ifExists)
+                    }
+
+                },
+                    WeatherUserDao::class.java,
+                    EmailMessageUserDao::class.java,
+                    WallpaperUserDao::class.java,
+                    EmailUserDao::class.java,
+                    GlobalClockUserDao::class.java,
+                    MessageUserDao::class.java,
+                    NewsUserDao::class.java,
+                    PlanUserDao::class.java,
+                    ReminderUserDao::class.java,
+                    ScheduleUserDao::class.java,
+                    WallpaperUserDao::class.java,
+                    WeatherUserDao::class.java,
+                    AlarmUserDao::class.java,
+                    TaskBeanDao::class.java,
+                    NoticeUserDao::class.java,
+                    MissedCallRecordUserDao::class.java,
+                    AudioRecordUserDao::class.java,
+                    RecentlyPlayedUserDao::class.java
+                )
+            }
         }
     }
 

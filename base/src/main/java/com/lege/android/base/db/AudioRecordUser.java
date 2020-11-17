@@ -17,6 +17,15 @@ public class AudioRecordUser {
     private long duration;
     private boolean isUpload=false;
     private long fileSize;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public long getFileSize() {
         return fileSize;
@@ -67,15 +76,16 @@ public class AudioRecordUser {
     public void setIsUpload(boolean isUpload) {
         this.isUpload = isUpload;
     }
-    @Generated(hash = 1345925923)
+    @Generated(hash = 2001585299)
     public AudioRecordUser(long timestemp, String path, long recordID, long duration,
-            boolean isUpload, long fileSize) {
+            boolean isUpload, long fileSize, String name) {
         this.timestemp = timestemp;
         this.path = path;
         this.recordID = recordID;
         this.duration = duration;
         this.isUpload = isUpload;
         this.fileSize = fileSize;
+        this.name = name;
     }
 
     @Generated(hash = 1550508959)
