@@ -27,38 +27,121 @@ class TomatoConstants {
     companion object {
         //选择的背景音乐
         const val FOCUS_MUSIC_SELECTED = "focus_music_selected"
+        const val FOCUS_MUSIC_SELECTED_CHILDREN = "focus_music_selected_children"
         const val IS_AUTO_NEXT = "is_auto_next"
+        const val IS_AUTO_NEXT_CHILDREN = "is_auto_next_children"
         const val RELAX_TIME = "relax_time"
+        const val RELAX_TIME_CHILDREN = "relax_time_children"
         const val TOMATO_TIME = "tomato_time"
+        const val TOMATO_TIME_CHILDREN = "tomato_time_children"
+        const val FOCUS_MUSIC_IS_OPEN = "focus_music_is_open"
+        const val FOCUS_MUSIC_IS_OPEN_CHILDREN = "focus_music_is_open_children"
 
+        private fun isChildrenMode():Boolean{
+            return PreferencesManager.getInstance().getBooleanResults2(SettingConstant.CHILDREN_MODEL,false)
+        }
+        fun isAutoNext():Boolean{
+            if(isChildrenMode()){
+                return PreferencesManager.getInstance().getBooleanResults2(FOCUS_MUSIC_SELECTED_CHILDREN,true)
+            }else{
+                return PreferencesManager.getInstance().getBooleanResults2(IS_AUTO_NEXT,true)
+            }
+        }
+        fun setAutoNext(isAuto:Boolean){
+            if(isChildrenMode()){
+                PreferencesManager.getInstance().saveBooleanResults(IS_AUTO_NEXT_CHILDREN,isAuto)
+            }else{
+                PreferencesManager.getInstance().saveBooleanResults(IS_AUTO_NEXT,isAuto)
+            }
+
+        }
+        fun isBGMOpen():Boolean{
+            if(isChildrenMode()){
+                return PreferencesManager.getInstance().getBooleanResults2(FOCUS_MUSIC_IS_OPEN_CHILDREN,true)
+            }else{
+                return PreferencesManager.getInstance().getBooleanResults2(FOCUS_MUSIC_IS_OPEN,true)
+            }
+
+        }
+        fun setBGMSwitch(isOpen:Boolean){
+            if(isChildrenMode()){
+                PreferencesManager.getInstance().saveBooleanResults(FOCUS_MUSIC_IS_OPEN_CHILDREN,isOpen)
+            }else{
+                PreferencesManager.getInstance().saveBooleanResults(FOCUS_MUSIC_IS_OPEN,isOpen)
+            }
+
+        }
         fun getBGM():String{
-            return PreferencesManager.getInstance().getStringResults(FOCUS_MUSIC_SELECTED,"")
+            if(isChildrenMode()){
+                return PreferencesManager.getInstance().getStringResults(FOCUS_MUSIC_SELECTED_CHILDREN,"")
+            }else{
+                return PreferencesManager.getInstance().getStringResults(FOCUS_MUSIC_SELECTED,"")
+            }
+
         }
         fun setBGM(json:String){
-            PreferencesManager.getInstance().saveStringResults(FOCUS_MUSIC_SELECTED,json)
+            if(isChildrenMode()){
+                PreferencesManager.getInstance().saveStringResults(FOCUS_MUSIC_SELECTED_CHILDREN,json)
+            }else{
+                PreferencesManager.getInstance().saveStringResults(FOCUS_MUSIC_SELECTED,json)
+            }
+
         }
         fun setTomatoTime(time:Int){
-            PreferencesManager.getInstance().saveIntegerResults(TOMATO_TIME,time)
+            if(isChildrenMode()){
+                PreferencesManager.getInstance().saveIntegerResults(TOMATO_TIME_CHILDREN,time)
+            }else{
+                PreferencesManager.getInstance().saveIntegerResults(TOMATO_TIME,time)
+            }
+
         }
         fun setTomatoRelaxTime(time:Int){
-            PreferencesManager.getInstance().saveIntegerResults(RELAX_TIME,time)
+            if(isChildrenMode()){
+                PreferencesManager.getInstance().saveIntegerResults(RELAX_TIME_CHILDREN,time)
+            }else{
+                PreferencesManager.getInstance().saveIntegerResults(RELAX_TIME,time)
+            }
+
         }
         fun getTomatoRelaxTime(): Int {
-            return PreferencesManager.getInstance().getIntegerResults(RELAX_TIME, 5 * 60 * 1000)
+            if(isChildrenMode()){
+                return PreferencesManager.getInstance().getIntegerResults(RELAX_TIME_CHILDREN, 5 * 60 * 1000)
+            }else{
+                return PreferencesManager.getInstance().getIntegerResults(RELAX_TIME, 5 * 60 * 1000)
+            }
+
         }
 
         fun getTomatoTime(): Int {
-            return PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME, 25 * 60 * 1000)
+            if(isChildrenMode()){
+                return PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME_CHILDREN, 25 * 60 * 1000)
+            }else{
+                return PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME, 25 * 60 * 1000)
+            }
+
         }
 
         fun getTomatoRelaxTimeShow(): String {
-            val time = PreferencesManager.getInstance().getIntegerResults(RELAX_TIME, 5 * 60 * 1000)
-            return "${time / 1000 / 60}分钟"
+            if(isChildrenMode()){
+                val time = PreferencesManager.getInstance().getIntegerResults(RELAX_TIME_CHILDREN, 5 * 60 * 1000)
+                return "${time / 1000 / 60}分钟"
+            }else{
+                val time = PreferencesManager.getInstance().getIntegerResults(RELAX_TIME, 5 * 60 * 1000)
+                return "${time / 1000 / 60}分钟"
+            }
+
         }
 
         fun getTomatoTimeShow(): String {
-            val time = PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME, 25 * 60 * 1000)
-            return "${time / 1000 / 60}分钟"
+            if(isChildrenMode()){
+                val time = PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME_CHILDREN, 25 * 60 * 1000)
+                return "${time / 1000 / 60}分钟"
+            }else{
+                val time = PreferencesManager.getInstance().getIntegerResults(TOMATO_TIME, 25 * 60 * 1000)
+                return "${time / 1000 / 60}分钟"
+            }
+
+
         }
     }
 }
