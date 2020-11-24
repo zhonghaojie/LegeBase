@@ -42,7 +42,7 @@ class TomatoConstants {
         }
         fun isAutoNext():Boolean{
             if(isChildrenMode()){
-                return PreferencesManager.getInstance().getBooleanResults2(FOCUS_MUSIC_SELECTED_CHILDREN,true)
+                return PreferencesManager.getInstance().getBooleanResults2(IS_AUTO_NEXT_CHILDREN,true)
             }else{
                 return PreferencesManager.getInstance().getBooleanResults2(IS_AUTO_NEXT,true)
             }
