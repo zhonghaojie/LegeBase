@@ -16,6 +16,7 @@ import com.lege.android.db.EmailUserDao;
 import com.lege.android.db.GlobalClockUserDao;
 import com.lege.android.db.MessageUserDao;
 import com.lege.android.db.MissedCallRecordUserDao;
+import com.lege.android.db.NewRemindUserDao;
 import com.lege.android.db.NewsUserDao;
 import com.lege.android.db.NoticeUserDao;
 import com.lege.android.db.PlanUserDao;
@@ -26,6 +27,8 @@ import com.lege.android.db.TaskBeanDao;
 import com.lege.android.db.UserDao;
 import com.lege.android.db.WallpaperUserDao;
 import com.lege.android.db.WeatherUserDao;
+
+import org.greenrobot.greendao.annotation.Id;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -407,6 +410,15 @@ public class DBHelper {
     }
 
     /**
+     * 查找newreminder所以数据
+     */
+    public List<NewRemindUser> findNewRemindAllData() {
+        List<NewRemindUser> newreminderUsers = new ArrayList<>();
+        newreminderUsers = getNewRemindUserDao().loadAll();
+        return newreminderUsers;
+    }
+
+    /**
      * 获取 MessageUserDao
      */
     public MessageUserDao getMessageUserDao() {
@@ -432,6 +444,13 @@ public class DBHelper {
      */
     public void updateReminderUserDate(ReminderUser user) {
         getReminderUserDao().update(user);
+    }
+
+    /**
+     * 更改newreminderUser数据
+     */
+    public void updateNewRemindUserDate(NewRemindUser user) {
+        getNewRemindUserDao().update(user);
     }
 
     /**
@@ -506,6 +525,16 @@ public class DBHelper {
      */
     public ReminderUser findReminderUserWithReminderidUserData(int reminderid) {
         ReminderUser reminderUser = getReminderUserDao().queryBuilder().where(ReminderUserDao.Properties.Remindid.eq(reminderid)).unique();
+        return reminderUser;
+    }
+
+    /**
+     * 根据newreminderid查找数据
+     *
+     * @param reminderid
+     */
+    public NewRemindUser findNewRemindUserWithReminderidUserData(int reminderid) {
+        NewRemindUser reminderUser = getNewRemindUserDao().queryBuilder().where(NewRemindUserDao.Properties.Id.eq(reminderid)).unique();
         return reminderUser;
     }
 
@@ -633,6 +662,13 @@ public class DBHelper {
     }
 
     /**
+     * 获取 NewRemindUserDao
+     */
+    public NewRemindUserDao getNewRemindUserDao() {
+        return mDaoSession.getNewRemindUserDao();
+    }
+
+    /**
      * 增加GlobalClockUser数据
      */
     public void addGlobalClockData(GlobalClockUser user) {
@@ -690,6 +726,21 @@ public class DBHelper {
      */
     public void deleteReminderUserData(ReminderUser user) {
         getReminderUserDao().delete(user);
+    }
+
+
+    /**
+     * 增加newreminder数据
+     */
+    public void addNewReminderData(NewRemindUser user) {
+        getNewRemindUserDao().insertOrReplace(user);
+    }
+
+    /**
+     * 删除newReminderUser数据
+     */
+    public void deleteNewReminderUserData(NewRemindUser user) {
+        getNewRemindUserDao().delete(user);
     }
 
 
