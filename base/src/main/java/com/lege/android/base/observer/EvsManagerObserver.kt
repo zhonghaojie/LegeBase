@@ -39,6 +39,11 @@ object EvsManagerObserver {
             }
         }
     }
-
+    //移除被观察者
+    fun unregisterObservable(activityName: String){
+        observableMap?.let{
+            it.remove(activityName)
+        }
+    }
 
 }
