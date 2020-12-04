@@ -346,7 +346,30 @@ public class DateFormatUtil {
         }
         return null;
     }
-
+    public static int WEEK_START = 1;
+    public static int WEEK_END = 2;
+    public static String getWeekStartOrEnd(int type) {
+        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        int i;
+        cal.setTime(d);
+        i = cal.get(Calendar.DAY_OF_WEEK);
+        if (type == WEEK_START) {
+            if (i == 1) {
+                i = 8;
+            }
+            int distance = (i - 1) - 1;//前面的-1：把周一设置为1
+            cal.set(Calendar.DATE,cal.get(Calendar.DATE) - distance);
+            return cal.get(Calendar.MONTH)+"月"+ cal.get(Calendar.DAY_OF_MONTH)+"日";
+        } else {
+            if (i == 1) {
+                i = 8;
+            }
+            int distance = 7 - (i - 1); //-1：把周一设置为1
+            cal.set(Calendar.DATE,cal.get(Calendar.DATE) + distance);
+            return cal.get(Calendar.MONTH)+"月"+ cal.get(Calendar.DAY_OF_MONTH)+"日";
+        }
+    }
     public static String getCurrentWeek2() {
         Calendar cal = Calendar.getInstance();
         int i = -1;
