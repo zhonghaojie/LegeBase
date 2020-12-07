@@ -170,6 +170,9 @@ class ReceiverActionConstant {
         //提醒
         const val ACTION_REMINDER_ALARM = "com.lege.reminderalarm"
 
+        //新提醒
+        const val ACTION_NEWREMINDER_ALARM = "com.lege.newreminderalarm"
+
         //闹钟
         const val ACTION_ALARM_ALARM = "com.lege.callalarm"
 

@@ -25,6 +25,8 @@ public class AlarmClockUtil {
     public static String HEAD_ALARM = "77";
     //通勤闹钟头部
     public static String HEAD_COMMUTE = "66";
+    //新习惯提醒头部
+    public static String HEAD_NEW_REMIND = "55";
 
     /**
      * 设置通勤闹钟
@@ -254,6 +256,77 @@ public class AlarmClockUtil {
     }
 
     /**
+     * head 8加到id最前面
+     * 设置重复提醒
+     */
+    public static void setNewRepeatReminder(Class<? extends BroadcastReceiver> br,Context context,String type, int reminderid, int remindertype, int starthourOfDay, int startminute, int endhourOfDay, int endminute, int interval, String title) {
+        String head = HEAD_NEW_REMIND;
+        int step = 1000;
+        int startTotalMinute = starthourOfDay * 60 + startminute;
+        int endTotalMinute = endhourOfDay * 60 + endminute;
+        int alarmCount = (endTotalMinute - startTotalMinute) / interval;
+        for (int i = 0; i < alarmCount; i++) {
+            int hourOfDay = (startTotalMinute + i * interval) / 60;
+            int minute = (startTotalMinute + i * interval) % 60;
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(System.currentTimeMillis());
+            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            c.set(Calendar.MINUTE, minute);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+            int tempcode = reminderid * step + i;
+            String requestcodestr = head + tempcode;
+            Intent intent = new Intent(context, br);
+            intent.setAction(ReceiverActionConstant.ACTION_NEWREMINDER_ALARM);
+            intent.putExtra("reminderid", reminderid);
+            intent.putExtra("remindertype", remindertype);
+            intent.putExtra("title", title);
+            intent.putExtra("type", type);
+            intent.putExtra("requestcode", Integer.parseInt(requestcodestr));
+            APPLog.log("新提醒闹钟" + "requestcode   "+Integer.parseInt(requestcodestr));
+            PendingIntent sender = PendingIntent.getBroadcast(
+                    context, Integer.parseInt(requestcodestr), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager am;
+            am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            //每天重复闹钟
+            APPLog.log("新提醒闹钟" + c.get(Calendar.DAY_OF_WEEK) + " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + "");
+            am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);
+        }
+    }
+
+    /**
+     * head 8加到id最前面
+     * 设置重复提醒
+     */
+    public static void setNewReminder(Class<? extends BroadcastReceiver> br,Context context,String type, int reminderid, int remindertype, int hourOfDay, int minute, int i,String title) {
+        String head = HEAD_NEW_REMIND;
+        int step = 1000;
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(System.currentTimeMillis());
+            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            c.set(Calendar.MINUTE, minute);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+            int tempcode = reminderid * step+i;
+            String requestcodestr = head + tempcode;
+            Intent intent = new Intent(context, br);
+            intent.setAction(ReceiverActionConstant.ACTION_NEWREMINDER_ALARM);
+            intent.putExtra("reminderid", reminderid);
+            intent.putExtra("remindertype", remindertype);
+            intent.putExtra("title", title);
+            intent.putExtra("type", type);
+            intent.putExtra("requestcode", Integer.parseInt(requestcodestr));
+            APPLog.log("新提醒闹钟" + "requestcode   "+Integer.parseInt(requestcodestr));
+            PendingIntent sender = PendingIntent.getBroadcast(
+                    context, Integer.parseInt(requestcodestr), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager am;
+            am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            //每天重复闹钟
+            APPLog.log("新提醒闹钟" + c.get(Calendar.DAY_OF_WEEK) + " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + "");
+            am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), sender);
+    }
+
+    /**
      * setp是为了跟闹钟区分
      *
      * @param context
@@ -276,6 +349,29 @@ public class AlarmClockUtil {
             int alarmRequestcode = Integer.parseInt(requestcode);
             deleteReminderClock(br,context, alarmRequestcode);
         }
+    }
+
+    public static void deleteNewRepeatReminder(Class<? extends BroadcastReceiver> br,Context context, int reminderid, int starthourOfDay, int startminute, int endhourOfDay, int endminute, int interval) {
+        int step = 1000;
+        String head = HEAD_NEW_REMIND;
+        int startTotalMinute = starthourOfDay * 60 + startminute;
+        int endTotalMinute = endhourOfDay * 60 + endminute;
+        int alarmCount = (endTotalMinute - startTotalMinute) / interval;
+        for (int i = 0; i < alarmCount; i++) {
+            int tempcode = reminderid * step + i;
+            String requestcode = head + tempcode;
+            int alarmRequestcode = Integer.parseInt(requestcode);
+            deleteNewReminderClock(br,context, alarmRequestcode);
+        }
+    }
+
+    public static void deleteNewReminder(Class<? extends BroadcastReceiver> br,Context context, int reminderid, int i) {
+        int step = 1000;
+        String head = HEAD_NEW_REMIND;
+        int tempcode = reminderid * step + i;
+        String requestcode = head + tempcode;
+        int alarmRequestcode = Integer.parseInt(requestcode);
+        deleteNewReminderClock(br,context, alarmRequestcode);
     }
 
     /**
@@ -319,6 +415,22 @@ public class AlarmClockUtil {
 //        Log.i("zhou", "deleteReminderClock===alarmRequestcode====" + alarmRequestcode);
         Intent intent = new Intent(context, br);
         intent.setAction(ReceiverActionConstant.ACTION_REMINDER_ALARM);
+        PendingIntent sender = PendingIntent.getBroadcast(
+                context, alarmRequestcode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am;
+        am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        am.cancel(sender);
+    }
+
+    /**
+     * 删除新提醒闹钟
+     *
+     * @param context
+     */
+    public static void deleteNewReminderClock(Class<? extends BroadcastReceiver> br,Context context, int alarmRequestcode) {
+//        Log.i("zhou", "deleteReminderClock===alarmRequestcode====" + alarmRequestcode);
+        Intent intent = new Intent(context, br);
+        intent.setAction(ReceiverActionConstant.ACTION_NEWREMINDER_ALARM);
         PendingIntent sender = PendingIntent.getBroadcast(
                 context, alarmRequestcode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am;
