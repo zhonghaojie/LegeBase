@@ -8,6 +8,15 @@ import com.lege.android.base.string.DateFormatUtil
  * Created by zhonghaojie on 2020-04-10.
  */
 
+//本地文件路径常量
+class LocalPathConstants{
+    companion object{
+        //需要后面跟上packageName + R.raw.xxxx
+        const val RAW_PATH = "android.resource://"
+    }
+}
+
+
 class TaskConstants{
     companion object{
         const val TASK_ALARM = "alarm"
