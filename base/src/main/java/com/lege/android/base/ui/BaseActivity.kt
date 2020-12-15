@@ -195,7 +195,7 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
      */
     open fun doBluetoothPermission() {}
 
-    private var currentFrg: Fragment? = null
+    protected var currentFrg: Fragment? = null
 
     protected open fun showFragment(id: Int, fragment: Fragment?) {
         if (fragment == null) {
