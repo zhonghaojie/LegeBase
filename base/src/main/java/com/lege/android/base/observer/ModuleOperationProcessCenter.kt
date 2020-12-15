@@ -12,7 +12,7 @@ import android.util.ArrayMap
  */
 object ModuleOperationProcessCenter {
     interface OnOperationReceivedListener {
-        fun onOperationReceived(operation:String)
+        fun onOperationReceived(operation:String,extra:String = "")
     }
     private var observableMap: MutableList<String>? = ArrayList()
     private var observers: ArrayMap<String, OnOperationReceivedListener>? = ArrayMap()
