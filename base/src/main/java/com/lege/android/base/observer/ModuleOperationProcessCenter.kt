@@ -40,10 +40,10 @@ object ModuleOperationProcessCenter {
     /**
      * 由子module调用，告诉处理中心，谁（name）要做什么样的操作（operation）
      */
-    fun needToControlAppModule(name:String,operation:String) {
+    fun needToControlAppModule(name:String,operation:String,extra:String) {
         observableMap?.let {
             if (it.contains(name)) {
-                observers?.forEach { it.value.onOperationReceived(operation) }
+                observers?.forEach { it.value.onOperationReceived(operation,extra) }
             }
         }
     }
