@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.view.MotionEvent
 import android.view.View
 import com.hjq.toast.ToastUtils
 import com.lege.android.base.PermissionConstant
 import com.lege.android.base.R
 import com.lege.android.base.log.APPLog
 import com.lege.android.base.screen.WakeLockManager
+import com.lege.android.base.util.TaskSingleInstance
+import com.lege.android.base.util.ThemeAndScreenManager
 import me.imid.swipebacklayout.lib.SwipeBackLayout
 import me.imid.swipebacklayout.lib.Utils
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase
@@ -123,27 +126,36 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
         return true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PermissionConstant.PERMISSTION_WRITE_READ_EXTERNAL_CODE -> if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
                 doSDCardPermission()
             }
             PermissionConstant.PERMISSTION_AUDIO_RECORD_CODE -> if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
                 doAudioRecordPermission()
             }
             PermissionConstant.PERMISSTION_CAMERA_CODE -> if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
                 doCameraPermission()
             }
             PermissionConstant.PERMISSTION_LOCATION_CODE -> if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
                 doLocationPermission()
             }
             PermissionConstant.PERMISSTION_PHONE_STATE_CODE -> if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
                 doPhoneStatePermission()
             }
             PermissionConstant.PERMISSTION_BLUETOOTH_CODE -> {
@@ -161,6 +173,27 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
                 }
             }
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ThemeAndScreenManager.get(applicationContext).screenProtect) {
+            if (ev.action == MotionEvent.ACTION_UP) {
+                if (needStartProtectCounter()) {
+                    TaskSingleInstance.getInstance(applicationContext).startTimer()
+                }
+            }
+        } else {
+            TaskSingleInstance.getInstance(applicationContext).stopTimer()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    protected open fun needToAvoidQuicklyClick(): Boolean {
+        return true
+    }
+
+    protected open fun needStartProtectCounter(): Boolean {
+        return true
     }
 
     /**
