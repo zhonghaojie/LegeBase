@@ -42,7 +42,7 @@ class ThemeAndScreenManager() {
         const val SCREEN_CLOCK_DIAL = "screen_clock_dial"
     }
 
-    private val pm = PreferencesManager.getInstance(BaseApp.getAppContext())
+    private val pm = PreferencesManager.getInstance()
     var theme: Int
         //主题  0智控   1内容
         get() {
