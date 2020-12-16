@@ -51,6 +51,11 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
         APPLog.log(BASE_ACTIVITY_TAG, javaClass.simpleName + "   " + "onCreate")
         mHelper = SwipeBackActivityHelper(this)
         mHelper?.onActivityCreate()
+        //打开任何界面都判定为人再跟前，重置检测间隔
+        //打开任何界面都判定为人再跟前，重置检测间隔
+        if (needStartProtectCounter()) {
+            TaskSingleInstance.getInstance().startTimer()
+        }
     }
     override fun getSwipeBackLayout(): SwipeBackLayout {
         return mHelper!!.swipeBackLayout
@@ -176,14 +181,14 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (ThemeAndScreenManager.get(applicationContext).screenProtect) {
+        if (ThemeAndScreenManager.instance.screenProtect) {
             if (ev.action == MotionEvent.ACTION_UP) {
                 if (needStartProtectCounter()) {
-                    TaskSingleInstance.getInstance(applicationContext).startTimer()
+                    TaskSingleInstance.getInstance().startTimer()
                 }
             }
         } else {
-            TaskSingleInstance.getInstance(applicationContext).stopTimer()
+            TaskSingleInstance.getInstance().stopTimer()
         }
         return super.dispatchTouchEvent(ev)
     }

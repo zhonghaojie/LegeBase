@@ -2,6 +2,7 @@ package com.lege.android.base.util
 
 
 import android.content.Context
+import com.lege.android.base.BaseApp
 import com.lege.android.base.PreferencesManager
 import com.lege.android.base.constants.SettingConstant
 import com.lege.android.base.data.EventUpdateControlStyle
@@ -13,20 +14,8 @@ import org.greenrobot.eventbus.EventBus
  */
 class ThemeAndScreenManager() {
     companion object {
-
-        private var instance: ThemeAndScreenManager? = null
-        private var mContext: Context ? = null
-
-        fun get(context: Context): ThemeAndScreenManager {
-            val current = instance
-            return if (current == null) {
-                val newManager = ThemeAndScreenManager()
-                instance = newManager
-                mContext = context
-                newManager
-            } else
-                current
-        }
+        @JvmStatic
+        val instance = ThemeAndScreenManager()
 
         //选择智控主题的风格
         const val THEME_DEVICE_CONTROL = 0
@@ -53,7 +42,7 @@ class ThemeAndScreenManager() {
         const val SCREEN_CLOCK_DIAL = "screen_clock_dial"
     }
 
-    private val pm = PreferencesManager.getInstance(mContext)
+    private val pm = PreferencesManager.getInstance(BaseApp.getAppContext())
     var theme: Int
         //主题  0智控   1内容
         get() {
