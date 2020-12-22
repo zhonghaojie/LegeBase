@@ -524,7 +524,6 @@ class DaoMasterHelper(context: Context, name: String, factory: SQLiteDatabase.Cu
                 )
             }
             newVersion <= 24->{
-                //录音表增加name字段
                 MigrationHelper.migrate(db, object : MigrationHelper.ReCreateAllTableListener {
                     override fun onCreateAllTables(db: Database, ifNotExists: Boolean) {
                         DaoMaster.createAllTables(db, ifNotExists)
