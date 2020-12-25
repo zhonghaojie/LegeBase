@@ -2,6 +2,8 @@ package com.lege.android.base.string;
 
 import com.lege.android.base.log.APPLog;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +20,23 @@ import static java.util.Calendar.DAY_OF_MONTH;
  * Created by loctek on 2020/6/17.
  */
 public class DateFormatUtil {
-    public static enum DateDistance{
-        DAY,HOUR,MINUTE,SECOND
+    public static enum DateDistance {
+        DAY, HOUR, MINUTE, SECOND
     }
+
+    public static String getDateTime(@NotNull Date date, @NotNull String format) {
+        String result = "";
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+            result = simpleDateFormat.format(date);
+        } catch (IllegalArgumentException e) {
+
+        } finally {
+            return result;
+        }
+
+    }
+
     public static String getSystemCurrent_Time() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
@@ -68,11 +84,13 @@ public class DateFormatUtil {
         Date date = new Date(System.currentTimeMillis());
         return simpleDateFormat.format(date);
     }
+
     public static String getCurrentDate4() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd");
         Date date = new Date(System.currentTimeMillis());
         return simpleDateFormat.format(date);
     }
+
     public static String getCurrentDate3() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date(System.currentTimeMillis());
@@ -103,17 +121,19 @@ public class DateFormatUtil {
         Date date = new Date(millsecond);
         return simpleDateFormat.format(date);
     }
+
     /**
      * 毫秒转化成日期
      *
      * @param millsecond
      * @return
      */
-    public static String millSecondConvertDate(long millsecond,String format) {
+    public static String millSecondConvertDate(long millsecond, String format) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         Date date = new Date(millsecond);
         return simpleDateFormat.format(date);
     }
+
     /**
      * yyyy年MM月dd日 HH:mm:ss"转成MM-dd，去除年
      *
@@ -346,8 +366,10 @@ public class DateFormatUtil {
         }
         return null;
     }
+
     public static int WEEK_START = 1;
     public static int WEEK_END = 2;
+
     public static String getWeekStartOrEnd(int type) {
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
@@ -359,17 +381,18 @@ public class DateFormatUtil {
                 i = 8;
             }
             int distance = (i - 1) - 1;//前面的-1：把周一设置为1
-            cal.set(Calendar.DATE,cal.get(Calendar.DATE) - distance);
-            return cal.get(Calendar.MONTH)+1+"月"+ cal.get(Calendar.DAY_OF_MONTH)+"日";
+            cal.set(Calendar.DATE, cal.get(Calendar.DATE) - distance);
+            return cal.get(Calendar.MONTH) + 1 + "月" + cal.get(Calendar.DAY_OF_MONTH) + "日";
         } else {
             if (i == 1) {
                 i = 8;
             }
             int distance = 7 - (i - 1); //-1：把周一设置为1
-            cal.set(Calendar.DATE,cal.get(Calendar.DATE) + distance);
-            return cal.get(Calendar.MONTH)+1+"月"+ cal.get(Calendar.DAY_OF_MONTH)+"日";
+            cal.set(Calendar.DATE, cal.get(Calendar.DATE) + distance);
+            return cal.get(Calendar.MONTH) + 1 + "月" + cal.get(Calendar.DAY_OF_MONTH) + "日";
         }
     }
+
     public static String getCurrentWeek2() {
         Calendar cal = Calendar.getInstance();
         int i = -1;
@@ -437,9 +460,10 @@ public class DateFormatUtil {
         String time = simpleDateFormat.format(mDate);
         return time;
     }
+
     //计算两个时间差多少
-    public static String getTimeDifference(String start,String end) {
-        String time="";
+    public static String getTimeDifference(String start, String end) {
+        String time = "";
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date beginTime = simpleDateFormat.parse(start);
@@ -453,9 +477,9 @@ public class DateFormatUtil {
             long minutes = (diff % (1000 * 60 * 60)) / (1000 * 60);
             /*计算秒*/
             long seconds = (diff % (1000 * 60)) / 1000;
-            time=hours+"小时";
-            if (diff>0){
-                time="+"+time;
+            time = hours + "小时";
+            if (diff > 0) {
+                time = "+" + time;
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -463,23 +487,24 @@ public class DateFormatUtil {
 
         return time;
     }
+
     //计算两个时间差多少
-    public static long getTimeDifference(String start,String end,String pattern,DateDistance distanceType) {
-        String time="";
+    public static long getTimeDifference(String start, String end, String pattern, DateDistance distanceType) {
+        String time = "";
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             Date beginTime = simpleDateFormat.parse(start);
             Date endTime = simpleDateFormat.parse(end);
             long diff = Math.abs(endTime.getTime() - beginTime.getTime());
-            if(distanceType == DateDistance.DAY){
+            if (distanceType == DateDistance.DAY) {
                 return diff / (1000 * 60 * 60 * 24);
-            }else if(distanceType == DateDistance.HOUR){
+            } else if (distanceType == DateDistance.HOUR) {
                 return (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-            }else if(distanceType == DateDistance.MINUTE){
+            } else if (distanceType == DateDistance.MINUTE) {
                 return (diff % (1000 * 60 * 60)) / (1000 * 60);
-            }else if(distanceType == DateDistance.SECOND){
+            } else if (distanceType == DateDistance.SECOND) {
                 return (diff % (1000 * 60)) / 1000;
-            }else {
+            } else {
                 return -1L;
             }
 
@@ -488,6 +513,7 @@ public class DateFormatUtil {
             return -1L;
         }
     }
+
     /**
      * 获取指定时间之后多少时间的时间
      *
@@ -519,6 +545,7 @@ public class DateFormatUtil {
         int weeks = cal.get(Calendar.WEEK_OF_YEAR);
         return weeks;
     }
+
     /**
      * 获取前n天日期、后n天日期
      *
@@ -580,8 +607,9 @@ public class DateFormatUtil {
 
     /**
      * 计算两个日期之间的yyyy-MM-dd的list
+     *
      * @param startTime 小日期
-     * @param endTime 大日期
+     * @param endTime   大日期
      * @return
      */
     public static List<String> getListDays(String startTime, String endTime) {
@@ -605,7 +633,8 @@ public class DateFormatUtil {
         }
         return days;
     }
-    public static List<String> getListDays(String startTime, String endTime,boolean isIncludeLastDate) {
+
+    public static List<String> getListDays(String startTime, String endTime, boolean isIncludeLastDate) {
         // 返回的日期集合
         List<String> days = new ArrayList<String>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -616,7 +645,7 @@ public class DateFormatUtil {
             tempStart.setTime(start);
             Calendar tempEnd = Calendar.getInstance();
             tempEnd.setTime(end);
-            if(isIncludeLastDate){
+            if (isIncludeLastDate) {
                 tempEnd.add(Calendar.DATE, +1);// 日期加1(包含结束)
             }
 
@@ -632,27 +661,26 @@ public class DateFormatUtil {
     //获取指定日期/当前日期的前后多少天
 
     /**
-     *
      * @param distance 正往后几天，负往前几天
      * @param baseDate 基准日期
      * @return
      */
-    public static List<String> getListDay(int distance,String baseDate){
+    public static List<String> getListDay(int distance, String baseDate) {
         SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
-        if(baseDate == null || baseDate.equals("")){
+        if (baseDate == null || baseDate.equals("")) {
             String endDate = getOldDate(distance);
-            if(distance>=0){
-                return getListDays(dft.format(System.currentTimeMillis()),endDate,false);
-            }else{
-                return getListDays(endDate,dft.format(System.currentTimeMillis()),false);
+            if (distance >= 0) {
+                return getListDays(dft.format(System.currentTimeMillis()), endDate, false);
+            } else {
+                return getListDays(endDate, dft.format(System.currentTimeMillis()), false);
             }
-        }else{
+        } else {
             try {
-                String endDate = getOldDate(baseDate,distance);
-                if(distance>=0){
-                    return getListDays(baseDate,endDate,false);
-                }else{
-                    return getListDays(endDate,baseDate,false);
+                String endDate = getOldDate(baseDate, distance);
+                if (distance >= 0) {
+                    return getListDays(baseDate, endDate, false);
+                } else {
+                    return getListDays(endDate, baseDate, false);
                 }
 
             } catch (ParseException e) {
@@ -665,6 +693,7 @@ public class DateFormatUtil {
 
     /**
      * 获得指定日期的前若干天
+     *
      * @param calendar
      * @param offset
      * @return
@@ -678,7 +707,7 @@ public class DateFormatUtil {
         Calendar _calendar = Calendar.getInstance();
         _calendar.set(calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        _calendar.set(Calendar.DATE, day+offset);
+        _calendar.set(Calendar.DATE, day + offset);
         return _calendar;
     }
 
@@ -698,17 +727,19 @@ public class DateFormatUtil {
 
     /**
      * 将date转换成String
+     *
      * @param date
      * @return
      */
     public static String dateToString(Date date) {
         SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");//日期格式
-        String tiem = sformat.format(date)+" 00:00";
+        String tiem = sformat.format(date) + " 00:00";
         return tiem;
     }
 
     /**
      * 将date转换成String
+     *
      * @param date
      * @return
      */
@@ -717,8 +748,10 @@ public class DateFormatUtil {
         String tiem = sformat.format(date);
         return tiem;
     }
+
     /**
      * 将date转换成String
+     *
      * @param date
      * @return
      */
@@ -727,8 +760,10 @@ public class DateFormatUtil {
         String tiem = sformat.format(date);
         return tiem;
     }
+
     /**
      * 将date转换成String
+     *
      * @param date
      * @return
      */
@@ -737,13 +772,15 @@ public class DateFormatUtil {
         String tiem = sformat.format(date);
         return tiem;
     }
+
     /**
      * yyyy-MM-dd HH:MM
+     *
      * @param
      * @return
      */
-    public static Date  stringToDate(String datetime) {
-        Date date=null;
+    public static Date stringToDate(String datetime) {
+        Date date = null;
         try {
             SimpleDateFormat sformatHM = new SimpleDateFormat("yyyy-MM-dd HH:mm");//日期格式
             date = sformatHM.parse(datetime);
@@ -758,11 +795,12 @@ public class DateFormatUtil {
      * 比较两日期的大小
      * date1小于date2返回-1，date1大于date2返回1，相等返回0
      */
-    public static int dateCompareTo(Date date1,Date date2) {
+    public static int dateCompareTo(Date date1, Date date2) {
         SimpleDateFormat sformatHM = new SimpleDateFormat("yyyy-MM-dd");
         int compareTo = sformatHM.format(date1).compareTo(sformatHM.format(date2));
         return compareTo;
     }
+
     /**
      * 根据date 放回 年/月/日 星期几
      */
@@ -773,38 +811,39 @@ public class DateFormatUtil {
         int i;
         cal.setTime(date);
         i = cal.get(Calendar.DAY_OF_WEEK);
-        String weektime ="";
+        String weektime = "";
         if (i != -1) {
             switch (i) {
                 case 1:
-                    weektime="星期天";
+                    weektime = "星期天";
                     break;
                 case 2:
-                    weektime="星期一";
+                    weektime = "星期一";
                     break;
                 case 3:
-                    weektime="星期二";
+                    weektime = "星期二";
                     break;
                 case 4:
-                    weektime="星期三";
+                    weektime = "星期三";
                     break;
                 case 5:
-                    weektime="星期四";
+                    weektime = "星期四";
                     break;
                 case 6:
-                    weektime="星期五";
+                    weektime = "星期五";
                     break;
                 case 7:
-                    weektime="星期六";
+                    weektime = "星期六";
                     break;
                 default:
                     break;
             }
 
         }
-        return tiem+" "+weektime;
+        return tiem + " " + weektime;
     }
-    public static int daysBetween(Date smdate, Date bdate)  {
+
+    public static int daysBetween(Date smdate, Date bdate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(smdate);
         long time1 = cal.getTimeInMillis();
@@ -813,9 +852,10 @@ public class DateFormatUtil {
         long between_days = Math.abs(time2 - time1) / (1000 * 3600 * 24);
         return Integer.parseInt(String.valueOf(between_days));
     }
-    public static int daysBetween(String smdate, String bdate)  {
+
+    public static int daysBetween(String smdate, String bdate) {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat s =new  SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         try {
             cal.setTime(s.parse(smdate));
             long time1 = cal.getTimeInMillis();
@@ -834,7 +874,7 @@ public class DateFormatUtil {
      * 将10 or 13 位时间戳转为时间字符串
      * convert the number 1407449951 1407499055617 to date/time format timestamp
      */
-    public static String timestamp2Date(String str_num ) {
+    public static String timestamp2Date(String str_num) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         if (str_num.length() == 13) {
             String date = sdf.format(new Date(Long.parseLong(str_num)));
@@ -844,6 +884,7 @@ public class DateFormatUtil {
             return date;
         }
     }
+
     //根据时间判断是不是今天
     public static Boolean handleDate(String time) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
