@@ -29,7 +29,8 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
         public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
         public final static Property Url = new Property(3, String.class, "url", false, "URL");
         public final static Property AddTime = new Property(4, String.class, "addTime", false, "ADD_TIME");
-        public final static Property PublishTime = new Property(5, String.class, "publishTime", false, "PUBLISH_TIME");
+        public final static Property PublishTime = new Property(5, long.class, "publishTime", false, "PUBLISH_TIME");
+        public final static Property ImageUrl = new Property(6, String.class, "imageUrl", false, "IMAGE_URL");
     };
 
 
@@ -50,7 +51,8 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
                 "\"TITLE\" TEXT," + // 2: title
                 "\"URL\" TEXT," + // 3: url
                 "\"ADD_TIME\" TEXT," + // 4: addTime
-                "\"PUBLISH_TIME\" TEXT);"); // 5: publishTime
+                "\"PUBLISH_TIME\" INTEGER NOT NULL ," + // 5: publishTime
+                "\"IMAGE_URL\" TEXT);"); // 6: imageUrl
     }
 
     /** Drops the underlying database table. */
@@ -83,10 +85,11 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
         if (addTime != null) {
             stmt.bindString(5, addTime);
         }
+        stmt.bindLong(6, entity.getPublishTime());
  
-        String publishTime = entity.getPublishTime();
-        if (publishTime != null) {
-            stmt.bindString(6, publishTime);
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(7, imageUrl);
         }
     }
 
@@ -114,10 +117,11 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
         if (addTime != null) {
             stmt.bindString(5, addTime);
         }
+        stmt.bindLong(6, entity.getPublishTime());
  
-        String publishTime = entity.getPublishTime();
-        if (publishTime != null) {
-            stmt.bindString(6, publishTime);
+        String imageUrl = entity.getImageUrl();
+        if (imageUrl != null) {
+            stmt.bindString(7, imageUrl);
         }
     }
 
@@ -134,7 +138,8 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // url
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // addTime
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // publishTime
+            cursor.getLong(offset + 5), // publishTime
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // imageUrl
         );
         return entity;
     }
@@ -146,7 +151,8 @@ public class ArticleHistoryBeanDao extends AbstractDao<ArticleHistoryBean, Long>
         entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setAddTime(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setPublishTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPublishTime(cursor.getLong(offset + 5));
+        entity.setImageUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override
