@@ -18,10 +18,11 @@ public class ArticleHistoryBean {
     private String addTime;
     private long publishTime;
     private String imageUrl;
+    private String updateTime;
 
-    @Generated(hash = 2079628004)
+    @Generated(hash = 439474391)
     public ArticleHistoryBean(Long id, int articleID, String title, String url,
-            String addTime, long publishTime, String imageUrl) {
+            String addTime, long publishTime, String imageUrl, String updateTime) {
         this.id = id;
         this.articleID = articleID;
         this.title = title;
@@ -29,6 +30,7 @@ public class ArticleHistoryBean {
         this.addTime = addTime;
         this.publishTime = publishTime;
         this.imageUrl = imageUrl;
+        this.updateTime = updateTime;
     }
 
     @Generated(hash = 1550925571)
@@ -89,6 +91,14 @@ public class ArticleHistoryBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getUpdateTime() {
+        return this.updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
 }
