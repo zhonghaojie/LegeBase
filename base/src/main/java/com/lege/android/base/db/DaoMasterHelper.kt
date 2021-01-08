@@ -556,7 +556,9 @@ class DaoMasterHelper(context: Context, name: String, factory: SQLiteDatabase.Cu
                     NewRemindUserDao::class.java
                 )
             }
-            newVersion <= 25->{
+            newVersion <= 25->
+            newVersion <= 26->
+            {
                 MigrationHelper.migrate(db, object : MigrationHelper.ReCreateAllTableListener {
                     override fun onCreateAllTables(db: Database, ifNotExists: Boolean) {
                         DaoMaster.createAllTables(db, ifNotExists)
