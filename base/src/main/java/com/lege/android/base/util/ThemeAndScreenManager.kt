@@ -30,6 +30,8 @@ class ThemeAndScreenManager() {
         const val DEVICE_CONTROL_STYLE_ID_MAN = "device_control_style_man"
         const val DEVICE_CONTROL_STYLE_ID_WOMAN = "device_control_style_woman"
         const val DEVICE_CONTROL_STYLE_ID_CHILD = "device_control_style_child"
+        const val DEVICE_CONTROL_STYLE_SIT_REMIND = "device_control_style_sit_remind"
+        const val DEVICE_CONTROL_STYLE_SIT_REMIND_WOMAN = "device_control_style_sit_remind_woman"
         const val DEVICE_CONTROL_STYLE_ID_OTHER = "other"
 
         //儿童模式智控风格
