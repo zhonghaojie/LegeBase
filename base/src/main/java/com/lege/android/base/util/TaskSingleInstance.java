@@ -58,13 +58,11 @@ public class TaskSingleInstance {
         if(!ThemeAndScreenManager.getInstance().getScreenProtect()){
             return;
         }
-        Log.i("DDDDDD","开始倒计时");
         handler.removeMessages(WHAT_START);
         handler.sendEmptyMessageDelayed(WHAT_START,ThemeAndScreenManager.getInstance().getScreenProtectStartTime()*60*1000);
     }
 
     public void stopTimer(){
-        Log.i("DDDDDD","停止倒计时");
         handler.removeMessages(WHAT_START);
     }
 
