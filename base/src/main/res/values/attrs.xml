@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AdjustTextView">
+        <attr name="is_width_adjust" format="boolean"/>
+        <attr name="is_height_adjust" format="boolean"/>
+    </declare-styleable>
+</resources>
