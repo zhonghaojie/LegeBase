@@ -30,6 +30,9 @@ class ThemeAndScreenManager() {
         const val DEVICE_CONTROL_STYLE_ID_MAN = "device_control_style_man"
         const val DEVICE_CONTROL_STYLE_ID_WOMAN = "device_control_style_woman"
         const val DEVICE_CONTROL_STYLE_ID_CHILD = "device_control_style_child"
+        const val DEVICE_CONTROL_STYLE_ID_SIMPLE = "device_control_style_simple"//智控极简风格
+
+
         const val DEVICE_CONTROL_STYLE_SIT_REMIND = "device_control_style_sit_remind"
         const val DEVICE_CONTROL_STYLE_SIT_REMIND_WOMAN = "device_control_style_sit_remind_woman"
         const val DEVICE_CONTROL_STYLE_ID_OTHER = "other"
@@ -57,7 +60,7 @@ class ThemeAndScreenManager() {
     //主题风格id
     var themeStyleID: String
         get() {
-            return pm.getStringResults("themeStyleID", DEVICE_CONTROL_STYLE_ID_MAN)
+            return pm.getStringResults("themeStyleID", DEVICE_CONTROL_STYLE_ID_SIMPLE)
         }
         set(value) {
             pm.saveStringResults("themeStyleID", value)
