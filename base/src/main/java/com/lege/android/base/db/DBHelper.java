@@ -1139,7 +1139,7 @@ public class DBHelper {
 
     public TaskBean findTaskByNormal(int taskId,String type){
         return getTaskBeanDao().queryBuilder()
-                .where(TaskBeanDao.Properties.TaskId.eq(taskId),TaskBeanDao.Properties.State.eq(TASK_STATE_NORMAL), TaskBeanDao.Properties.Type.in(TASK_SCHEDULE,TASK_PLAN)).unique();
+                .where(TaskBeanDao.Properties.TaskId.eq(taskId),TaskBeanDao.Properties.State.in(TASK_STATE_NORMAL,TASK_STATE_DELAY), TaskBeanDao.Properties.Type.in(TASK_SCHEDULE,TASK_PLAN)).unique();
 
     }
 
