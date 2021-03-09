@@ -19,12 +19,14 @@ import java.util.List;
  * Created by zhoushaoqing on 18-10-30.
  */
 
-public class WifiHelper {
+public class WifiHelper implements NetStateChangeObserver {
     private static WifiHelper INSTANCE = null;
     private WifiManager wifiManager;
     private static final String TAG="ConfigNetWork_TEST";
 
     private WifiHelper() {
+
+        WifiReceiver.registerObserver(this);
 
     }
 
@@ -441,5 +443,37 @@ public class WifiHelper {
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifiNetworkInfo.getState() == NetworkInfo.State.CONNECTED;
+    }
+
+    private boolean isNetworkConnected = false;
+    private NetworkType networkType ;
+
+    public boolean isNetworkConnected() {
+        return isNetworkConnected;
+    }
+
+    public NetworkType getNetworkType() {
+        return networkType;
+    }
+
+    @Override
+    public void onNetDisconnected() {
+        isNetworkConnected = false;
+    }
+
+    @Override
+    public void onNetConnected(NetworkType networkType) {
+        isNetworkConnected = true;
+        this.networkType = networkType;
+    }
+
+    @Override
+    public void onNetworkStateChange(NetworkInfo info) {
+
+    }
+
+    @Override
+    public void onWifiStateChange(WifiState state) {
+
     }
 }
