@@ -1,9 +1,8 @@
 package com.lege.android.base.retrofit
 
 import android.util.Log
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import com.lege.android.base.wifi.WifiHelper
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,19 +25,28 @@ class BaseRetrofit {
             logging.level = HttpLoggingInterceptor.Level.BODY
             val clientBuilder = OkHttpClient.Builder()
             val client = clientBuilder
-                    .connectTimeout(60L, TimeUnit.SECONDS)
-                    .retryOnConnectionFailure(false)
-                    .writeTimeout(60L, TimeUnit.SECONDS)
-                    .readTimeout(60L, TimeUnit.SECONDS)
-                    .addInterceptor(logging)
-                    .build()
+                .connectTimeout(60L, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(false)
+                .eventListener(object:EventListener(){
+                    override fun callStart(call: Call) {
+                        super.callStart(call)
+                        if(!WifiHelper.getInstance().isNetworkConnected){
+                            GlobalRequestWatcher.networkUnavailable()
+                            call.cancel()
+                        }
+                    }
+                })
+                .writeTimeout(60L, TimeUnit.SECONDS)
+                .readTimeout(60L, TimeUnit.SECONDS)
+                .addInterceptor(logging)
+                .build()
 
             val retrofit = Retrofit.Builder()
-                    .client(client)
-                    .baseUrl(Urls.BASE)
-                    //.baseUrl(Urls.TEST_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+                .client(client)
+                .baseUrl(Urls.BASE)
+                //.baseUrl(Urls.TEST_BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
             return retrofit
         }
     }

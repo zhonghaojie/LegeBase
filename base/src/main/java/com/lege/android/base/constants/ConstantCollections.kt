@@ -445,6 +445,8 @@ class BleDeviceConstant {
 
         //儿童身高
         const val CHILD_HEIGHT = "child_height"
+        const val CHILD_SIT_HEIGHT = "child_sit_height"
+        const val CHILD_STAND_HEIGHT = "child_stand_height"
 
         //身高设置日期，用于提醒用户修改身高
         const val CHILD_HEIGHT_SET_DATE = "child_height_set_date"
