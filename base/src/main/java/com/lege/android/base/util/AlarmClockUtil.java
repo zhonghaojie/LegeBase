@@ -266,8 +266,8 @@ public class AlarmClockUtil {
         int endTotalMinute = endhourOfDay * 60 + endminute;
         int alarmCount = (endTotalMinute - startTotalMinute) / interval;
         for (int i = 0; i < alarmCount; i++) {
-            int hourOfDay = (startTotalMinute + i * interval) / 60;
-            int minute = (startTotalMinute + i * interval) % 60;
+            int hourOfDay = (startTotalMinute + (i+1) * interval) / 60;
+            int minute = (startTotalMinute +  (i+1) * interval) % 60;
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(System.currentTimeMillis());
             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
