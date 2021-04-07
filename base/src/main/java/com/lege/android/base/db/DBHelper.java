@@ -371,30 +371,38 @@ public class DBHelper {
 
         PlanUser planUser = getPlanUserDao().queryBuilder()
                 .where(PlanUserDao.Properties.Taskid.eq(planid)).unique();
-        getPlanUserDao().delete(planUser);
-        TaskBean task = findTaskByTaskId(planid, TASK_PLAN);
-        if (task != null) {
-            removeTaskBean(task);
+        if(planUser!=null){
+            getPlanUserDao().delete(planUser);
+            TaskBean task = findTaskByTaskId(planid, TASK_PLAN);
+            if (task != null) {
+                removeTaskBean(task);
+            }
         }
+
+
     }
     /**
      * 删除待办 （进入回收站）
      */
-    public void deletePlanUserByPlanid(int planid,int isDelete) {
+    public void recyclerTodo(int planid,int isDelete) {
 
         PlanUser planUser = getPlanUserDao().queryBuilder()
                 .where(PlanUserDao.Properties.Taskid.eq(planid)).unique();
-        planUser.setIs_delete(isDelete);
-        updatePlanUserDate(planUser);
-        TaskBean task = findTaskByTaskId(planid, TASK_PLAN);
-        if (task != null) {
-            if(isDelete == 1){
-                task.setState(TASK_STATE_DEL);
-            }else{
-                task.setState(TASK_STATE_NORMAL);
+        if(planUser!=null){
+            planUser.setIs_delete(isDelete);
+            updatePlanUserDate(planUser);
+            TaskBean task = findTaskByTaskId(planid, TASK_PLAN);
+            if (task != null) {
+                if(isDelete == 1){
+                    task.setState(TASK_STATE_DEL);
+                }else{
+                    task.setDelayAlertTime("");
+                    task.setState(TASK_STATE_NORMAL);
+                }
+                updateTaskBean(task);
             }
-            updateTaskBean(task);
         }
+
     }
     //删除待办
     public void deletePlanUser(PlanUser planUser) {
@@ -1033,6 +1041,7 @@ public class DBHelper {
                 if(isDelete == 1){
                     taskbean.setState(TASK_STATE_DEL);
                 }else{
+                    taskbean.setDelayAlertTime("");
                     taskbean.setState(TASK_STATE_NORMAL);
                 }
                 updateTaskBean(taskbean);
