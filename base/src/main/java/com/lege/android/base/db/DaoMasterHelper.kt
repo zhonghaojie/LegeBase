@@ -590,6 +590,7 @@ class DaoMasterHelper(context: Context, name: String, factory: SQLiteDatabase.Cu
                 )
             }
             newVersion<=27->{
+                //PlanUser ; ScheduleUser增加部分字段
                 MigrationHelper.migrate(db, object : MigrationHelper.ReCreateAllTableListener {
                     override fun onCreateAllTables(db: Database, ifNotExists: Boolean) {
                         DaoMaster.createAllTables(db, ifNotExists)
