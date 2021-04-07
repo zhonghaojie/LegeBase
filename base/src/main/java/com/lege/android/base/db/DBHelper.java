@@ -377,12 +377,45 @@ public class DBHelper {
             removeTaskBean(task);
         }
     }
+    /**
+     * 删除待办 （进入回收站）
+     */
+    public void deletePlanUserByPlanid(int planid,int isDelete) {
 
+        PlanUser planUser = getPlanUserDao().queryBuilder()
+                .where(PlanUserDao.Properties.Taskid.eq(planid)).unique();
+        planUser.setIs_delete(isDelete);
+        updatePlanUserDate(planUser);
+        TaskBean task = findTaskByTaskId(planid, TASK_PLAN);
+        if (task != null) {
+            if(isDelete == 1){
+                task.setState(TASK_STATE_DEL);
+            }else{
+                task.setState(TASK_STATE_NORMAL);
+            }
+            updateTaskBean(task);
+        }
+    }
+    //删除待办
     public void deletePlanUser(PlanUser planUser) {
         getPlanUserDao().delete(planUser);
         TaskBean task = findTaskByTaskId(planUser.getTaskid(), TASK_PLAN);
         if (task != null) {
             removeTaskBean(task);
+        }
+    }
+    //删除/恢复待办（进入回收站）
+    public void deletePlanUser(PlanUser planUser,int isDelete){
+        planUser.setIs_delete(isDelete);
+        updatePlanUserDate(planUser);
+        TaskBean task = findTaskByTaskId(planUser.getTaskid(), TASK_PLAN);
+        if (task != null) {
+            if(isDelete == 1){
+                task.setState(TASK_STATE_DEL);
+            }else{
+                task.setState(TASK_STATE_NORMAL);
+            }
+            updateTaskBean(task);
         }
     }
 
@@ -988,7 +1021,26 @@ public class DBHelper {
             removeTaskBean(taskbean);
         }
     }
+    //删除日程（进入回收站）
+    public void recycleSchedule(int scheduleId,int isDelete){
+        ScheduleUser scheduleUser = getScheduleUserDao().queryBuilder()
+                .where(ScheduleUserDao.Properties.Scheduleid.eq(scheduleId)).unique();
+        if (scheduleUser != null) {
+            scheduleUser.setIs_delete(isDelete);
+            updateScheduleUserData(scheduleUser);
+            TaskBean taskbean = findTaskByTaskId(scheduleId, TASK_SCHEDULE);
+            if (taskbean != null) {
+                if(isDelete == 1){
+                    taskbean.setState(TASK_STATE_DEL);
+                }else{
+                    taskbean.setState(TASK_STATE_NORMAL);
+                }
+                updateTaskBean(taskbean);
 
+            }
+        }
+    }
+    //删除日程
     public void deleteSchedule(ScheduleUser scheduleUser) {
         getScheduleUserDao().delete(scheduleUser);
         TaskBean taskbean = findTaskByTaskId(scheduleUser.getScheduleid(), TASK_SCHEDULE);
@@ -996,7 +1048,20 @@ public class DBHelper {
             removeTaskBean(taskbean);
         }
     }
-
+    //    删除日程（进入回收站）
+    public void recycleSchedule(ScheduleUser scheduleUser,int isDelete) {
+        scheduleUser.setIs_delete(isDelete);
+        updateScheduleUserData(scheduleUser);
+        TaskBean taskbean = findTaskByTaskId(scheduleUser.getScheduleid(), TASK_SCHEDULE);
+        if (taskbean != null) {
+            if(isDelete == 1){
+                taskbean.setState(TASK_STATE_DEL);
+            }else{
+                taskbean.setState(TASK_STATE_NORMAL);
+            }
+            updateTaskBean(taskbean);
+        }
+    }
     /**
      * 根据isreminded状态查找ScheduleUser列表数据
      */
@@ -1136,7 +1201,6 @@ public class DBHelper {
     /***
      * 查询未完成任务
      * **/
-
     public TaskBean findTaskByNormal(int taskId,String type){
         return getTaskBeanDao().queryBuilder()
                 .where(TaskBeanDao.Properties.TaskId.eq(taskId),TaskBeanDao.Properties.State.in(TASK_STATE_NORMAL,TASK_STATE_DELAY), TaskBeanDao.Properties.Type.in(TASK_SCHEDULE,TASK_PLAN)).unique();

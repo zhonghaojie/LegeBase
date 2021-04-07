@@ -21,6 +21,70 @@ public class ScheduleUser {
     private String readed;
     private String isReminded;
     private String time;
+    private String remark;
+    private Long add_time;
+    private int user_id;
+    private String device_sn;
+    private int tag;
+    private int is_delete;
+    private String human_date;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Long getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(Long add_time) {
+        this.add_time = add_time;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getDevice_sn() {
+        return device_sn;
+    }
+
+    public void setDevice_sn(String device_sn) {
+        this.device_sn = device_sn;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
+
+    public int getIs_delete() {
+        return is_delete;
+    }
+
+    public void setIs_delete(int is_delete) {
+        this.is_delete = is_delete;
+    }
+
+    public String getHuman_date() {
+        return human_date;
+    }
+
+    public void setHuman_date(String human_date) {
+        this.human_date = human_date;
+    }
+
     public String getTime() {
         return this.time;
     }
