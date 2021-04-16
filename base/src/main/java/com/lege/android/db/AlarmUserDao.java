@@ -30,7 +30,9 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         public final static Property Repeat = new Property(3, String.class, "repeat", false, "REPEAT");
         public final static Property Ringingid = new Property(4, String.class, "ringingid", false, "RINGINGID");
         public final static Property IsStart = new Property(5, int.class, "isStart", false, "IS_START");
-        public final static Property Startdate = new Property(6, String.class, "startdate", false, "STARTDATE");
+        public final static Property Skip_holiday = new Property(6, int.class, "skip_holiday", false, "SKIP_HOLIDAY");
+        public final static Property Startdate = new Property(7, String.class, "startdate", false, "STARTDATE");
+        public final static Property Tag = new Property(8, String.class, "tag", false, "TAG");
     };
 
 
@@ -52,7 +54,9 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
                 "\"REPEAT\" TEXT," + // 3: repeat
                 "\"RINGINGID\" TEXT," + // 4: ringingid
                 "\"IS_START\" INTEGER NOT NULL ," + // 5: isStart
-                "\"STARTDATE\" TEXT);"); // 6: startdate
+                "\"SKIP_HOLIDAY\" INTEGER NOT NULL ," + // 6: skip_holiday
+                "\"STARTDATE\" TEXT," + // 7: startdate
+                "\"TAG\" TEXT);"); // 8: tag
     }
 
     /** Drops the underlying database table. */
@@ -86,10 +90,16 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
             stmt.bindString(5, ringingid);
         }
         stmt.bindLong(6, entity.getIsStart());
+        stmt.bindLong(7, entity.getSkip_holiday());
  
         String startdate = entity.getStartdate();
         if (startdate != null) {
-            stmt.bindString(7, startdate);
+            stmt.bindString(8, startdate);
+        }
+ 
+        String tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindString(9, tag);
         }
     }
 
@@ -118,10 +128,16 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
             stmt.bindString(5, ringingid);
         }
         stmt.bindLong(6, entity.getIsStart());
+        stmt.bindLong(7, entity.getSkip_holiday());
  
         String startdate = entity.getStartdate();
         if (startdate != null) {
-            stmt.bindString(7, startdate);
+            stmt.bindString(8, startdate);
+        }
+ 
+        String tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindString(9, tag);
         }
     }
 
@@ -139,7 +155,9 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // repeat
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // ringingid
             cursor.getInt(offset + 5), // isStart
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // startdate
+            cursor.getInt(offset + 6), // skip_holiday
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // startdate
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // tag
         );
         return entity;
     }
@@ -152,7 +170,9 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         entity.setRepeat(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setRingingid(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setIsStart(cursor.getInt(offset + 5));
-        entity.setStartdate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setSkip_holiday(cursor.getInt(offset + 6));
+        entity.setStartdate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setTag(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

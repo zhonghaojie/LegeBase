@@ -13,7 +13,9 @@ public class AlarmUser {
     private String repeat ;
     private String ringingid;
     private int isStart;
+    private int skip_holiday;
     private String startdate;
+    private String tag;
     public String getStartdate() {
         return this.startdate;
     }
@@ -56,16 +58,31 @@ public class AlarmUser {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 670475733)
+    public String getTag() {
+        return this.tag;
+    }
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+    public int getSkip_holiday() {
+        return this.skip_holiday;
+    }
+    public void setSkip_holiday(int skip_holiday) {
+        this.skip_holiday = skip_holiday;
+    }
+    @Generated(hash = 1455011809)
     public AlarmUser(Long id, int alarmid, String time, String repeat,
-            String ringingid, int isStart, String startdate) {
+            String ringingid, int isStart, int skip_holiday, String startdate,
+            String tag) {
         this.id = id;
         this.alarmid = alarmid;
         this.time = time;
         this.repeat = repeat;
         this.ringingid = ringingid;
         this.isStart = isStart;
+        this.skip_holiday = skip_holiday;
         this.startdate = startdate;
+        this.tag = tag;
     }
     @Generated(hash = 1160523540)
     public AlarmUser() {

@@ -36,6 +36,13 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         public final static Property Readed = new Property(9, String.class, "readed", false, "READED");
         public final static Property IsReminded = new Property(10, String.class, "isReminded", false, "IS_REMINDED");
         public final static Property Time = new Property(11, String.class, "time", false, "TIME");
+        public final static Property Remark = new Property(12, String.class, "remark", false, "REMARK");
+        public final static Property Add_time = new Property(13, Long.class, "add_time", false, "ADD_TIME");
+        public final static Property User_id = new Property(14, int.class, "user_id", false, "USER_ID");
+        public final static Property Device_sn = new Property(15, String.class, "device_sn", false, "DEVICE_SN");
+        public final static Property Tag = new Property(16, int.class, "tag", false, "TAG");
+        public final static Property Is_delete = new Property(17, int.class, "is_delete", false, "IS_DELETE");
+        public final static Property Human_date = new Property(18, String.class, "human_date", false, "HUMAN_DATE");
     };
 
 
@@ -62,7 +69,14 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
                 "\"ALERT\" TEXT," + // 8: alert
                 "\"READED\" TEXT," + // 9: readed
                 "\"IS_REMINDED\" TEXT," + // 10: isReminded
-                "\"TIME\" TEXT);"); // 11: time
+                "\"TIME\" TEXT," + // 11: time
+                "\"REMARK\" TEXT," + // 12: remark
+                "\"ADD_TIME\" INTEGER," + // 13: add_time
+                "\"USER_ID\" INTEGER NOT NULL ," + // 14: user_id
+                "\"DEVICE_SN\" TEXT," + // 15: device_sn
+                "\"TAG\" INTEGER NOT NULL ," + // 16: tag
+                "\"IS_DELETE\" INTEGER NOT NULL ," + // 17: is_delete
+                "\"HUMAN_DATE\" TEXT);"); // 18: human_date
         // Add Indexes
         db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_SCHEDULE_USER_SCHEDULEID ON SCHEDULE_USER" +
                 " (\"SCHEDULEID\" ASC);");
@@ -129,6 +143,29 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         if (time != null) {
             stmt.bindString(12, time);
         }
+ 
+        String remark = entity.getRemark();
+        if (remark != null) {
+            stmt.bindString(13, remark);
+        }
+ 
+        Long add_time = entity.getAdd_time();
+        if (add_time != null) {
+            stmt.bindLong(14, add_time);
+        }
+        stmt.bindLong(15, entity.getUser_id());
+ 
+        String device_sn = entity.getDevice_sn();
+        if (device_sn != null) {
+            stmt.bindString(16, device_sn);
+        }
+        stmt.bindLong(17, entity.getTag());
+        stmt.bindLong(18, entity.getIs_delete());
+ 
+        String human_date = entity.getHuman_date();
+        if (human_date != null) {
+            stmt.bindString(19, human_date);
+        }
     }
 
     @Override
@@ -186,6 +223,29 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         if (time != null) {
             stmt.bindString(12, time);
         }
+ 
+        String remark = entity.getRemark();
+        if (remark != null) {
+            stmt.bindString(13, remark);
+        }
+ 
+        Long add_time = entity.getAdd_time();
+        if (add_time != null) {
+            stmt.bindLong(14, add_time);
+        }
+        stmt.bindLong(15, entity.getUser_id());
+ 
+        String device_sn = entity.getDevice_sn();
+        if (device_sn != null) {
+            stmt.bindString(16, device_sn);
+        }
+        stmt.bindLong(17, entity.getTag());
+        stmt.bindLong(18, entity.getIs_delete());
+ 
+        String human_date = entity.getHuman_date();
+        if (human_date != null) {
+            stmt.bindString(19, human_date);
+        }
     }
 
     @Override
@@ -207,7 +267,14 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // alert
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // readed
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // isReminded
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // time
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // time
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // remark
+            cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13), // add_time
+            cursor.getInt(offset + 14), // user_id
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // device_sn
+            cursor.getInt(offset + 16), // tag
+            cursor.getInt(offset + 17), // is_delete
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // human_date
         );
         return entity;
     }
@@ -226,6 +293,13 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         entity.setReaded(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setIsReminded(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setTime(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setRemark(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setAdd_time(cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13));
+        entity.setUser_id(cursor.getInt(offset + 14));
+        entity.setDevice_sn(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setTag(cursor.getInt(offset + 16));
+        entity.setIs_delete(cursor.getInt(offset + 17));
+        entity.setHuman_date(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
      }
     
     @Override

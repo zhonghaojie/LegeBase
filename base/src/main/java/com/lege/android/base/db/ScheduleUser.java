@@ -157,11 +157,12 @@ public class ScheduleUser {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1123082903)
+    @Generated(hash = 1802842088)
     public ScheduleUser(Long id, int scheduleid, String startdate,
             String starttime, String enddate, String endtime, String title,
             int is_allday, String alert, String readed, String isReminded,
-            String time) {
+            String time, String remark, Long add_time, int user_id,
+            String device_sn, int tag, int is_delete, String human_date) {
         this.id = id;
         this.scheduleid = scheduleid;
         this.startdate = startdate;
@@ -174,7 +175,15 @@ public class ScheduleUser {
         this.readed = readed;
         this.isReminded = isReminded;
         this.time = time;
+        this.remark = remark;
+        this.add_time = add_time;
+        this.user_id = user_id;
+        this.device_sn = device_sn;
+        this.tag = tag;
+        this.is_delete = is_delete;
+        this.human_date = human_date;
     }
+
     @Generated(hash = 566555504)
     public ScheduleUser() {
     }

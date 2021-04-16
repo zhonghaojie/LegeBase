@@ -102,14 +102,23 @@ public class PlanUser {
     public void setStatus(int status) {
         this.status = status;
     }
-    @Generated(hash = 1367105404)
-    public PlanUser(Long id, int taskid, String subject, String duedate, int status) {
+    @Generated(hash = 1976902049)
+    public PlanUser(Long id, int taskid, String subject, String duedate, int status,
+            String human_date, String device_sn, int tag, int is_delete, int user_id,
+            Long add_time) {
         this.id = id;
         this.taskid = taskid;
         this.subject = subject;
         this.duedate = duedate;
         this.status = status;
+        this.human_date = human_date;
+        this.device_sn = device_sn;
+        this.tag = tag;
+        this.is_delete = is_delete;
+        this.user_id = user_id;
+        this.add_time = add_time;
     }
+
     @Generated(hash = 2114241025)
     public PlanUser() {
     }

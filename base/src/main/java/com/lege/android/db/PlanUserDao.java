@@ -29,6 +29,12 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         public final static Property Subject = new Property(2, String.class, "subject", false, "SUBJECT");
         public final static Property Duedate = new Property(3, String.class, "duedate", false, "DUEDATE");
         public final static Property Status = new Property(4, int.class, "status", false, "STATUS");
+        public final static Property Human_date = new Property(5, String.class, "human_date", false, "HUMAN_DATE");
+        public final static Property Device_sn = new Property(6, String.class, "device_sn", false, "DEVICE_SN");
+        public final static Property Tag = new Property(7, int.class, "tag", false, "TAG");
+        public final static Property Is_delete = new Property(8, int.class, "is_delete", false, "IS_DELETE");
+        public final static Property User_id = new Property(9, int.class, "user_id", false, "USER_ID");
+        public final static Property Add_time = new Property(10, Long.class, "add_time", false, "ADD_TIME");
     };
 
 
@@ -48,7 +54,13 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
                 "\"TASKID\" INTEGER NOT NULL ," + // 1: taskid
                 "\"SUBJECT\" TEXT," + // 2: subject
                 "\"DUEDATE\" TEXT," + // 3: duedate
-                "\"STATUS\" INTEGER NOT NULL );"); // 4: status
+                "\"STATUS\" INTEGER NOT NULL ," + // 4: status
+                "\"HUMAN_DATE\" TEXT," + // 5: human_date
+                "\"DEVICE_SN\" TEXT," + // 6: device_sn
+                "\"TAG\" INTEGER NOT NULL ," + // 7: tag
+                "\"IS_DELETE\" INTEGER NOT NULL ," + // 8: is_delete
+                "\"USER_ID\" INTEGER NOT NULL ," + // 9: user_id
+                "\"ADD_TIME\" INTEGER);"); // 10: add_time
         // Add Indexes
         db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_PLAN_USER_TASKID ON PLAN_USER" +
                 " (\"TASKID\" ASC);");
@@ -80,6 +92,24 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
             stmt.bindString(4, duedate);
         }
         stmt.bindLong(5, entity.getStatus());
+ 
+        String human_date = entity.getHuman_date();
+        if (human_date != null) {
+            stmt.bindString(6, human_date);
+        }
+ 
+        String device_sn = entity.getDevice_sn();
+        if (device_sn != null) {
+            stmt.bindString(7, device_sn);
+        }
+        stmt.bindLong(8, entity.getTag());
+        stmt.bindLong(9, entity.getIs_delete());
+        stmt.bindLong(10, entity.getUser_id());
+ 
+        Long add_time = entity.getAdd_time();
+        if (add_time != null) {
+            stmt.bindLong(11, add_time);
+        }
     }
 
     @Override
@@ -102,6 +132,24 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
             stmt.bindString(4, duedate);
         }
         stmt.bindLong(5, entity.getStatus());
+ 
+        String human_date = entity.getHuman_date();
+        if (human_date != null) {
+            stmt.bindString(6, human_date);
+        }
+ 
+        String device_sn = entity.getDevice_sn();
+        if (device_sn != null) {
+            stmt.bindString(7, device_sn);
+        }
+        stmt.bindLong(8, entity.getTag());
+        stmt.bindLong(9, entity.getIs_delete());
+        stmt.bindLong(10, entity.getUser_id());
+ 
+        Long add_time = entity.getAdd_time();
+        if (add_time != null) {
+            stmt.bindLong(11, add_time);
+        }
     }
 
     @Override
@@ -116,7 +164,13 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
             cursor.getInt(offset + 1), // taskid
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // subject
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // duedate
-            cursor.getInt(offset + 4) // status
+            cursor.getInt(offset + 4), // status
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // human_date
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // device_sn
+            cursor.getInt(offset + 7), // tag
+            cursor.getInt(offset + 8), // is_delete
+            cursor.getInt(offset + 9), // user_id
+            cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10) // add_time
         );
         return entity;
     }
@@ -128,6 +182,12 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         entity.setSubject(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setDuedate(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setStatus(cursor.getInt(offset + 4));
+        entity.setHuman_date(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDevice_sn(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTag(cursor.getInt(offset + 7));
+        entity.setIs_delete(cursor.getInt(offset + 8));
+        entity.setUser_id(cursor.getInt(offset + 9));
+        entity.setAdd_time(cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10));
      }
     
     @Override
