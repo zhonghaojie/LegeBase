@@ -63,7 +63,7 @@ dependencies {
     api libs.retrofit2
     api libs.retrofit_converter
     api libs.converter_scalars
-    api libs.converter_gson
+    api libs.converter_son
 
     api libs.design
     api libs.eventbus
@@ -75,4 +75,5 @@ dependencies {
     api libs.okhttp311
     api libs.okhttp311_urlconnection
     api libs.recyclerview
+    implementation libs.CommonView
 }

@@ -54,15 +54,37 @@ ext.versions = [
         NewbieGuide          : "v2.4.0",//新手引导控件
         MPAndroidChart       : "v3.1.0",//MPAndroidChart图表
         pullToRefresh        : "1.0.11",//下拉刷新
-        paperdb              : "2.6",//类似一个非关系型数据库的存储库
+        paperdb              : "2.6",//类似一个非关系型数据库的存储库 https://github.com/pilgr/Paper
         calendarview         : "3.6.6",//日历控件
         gridviewpager        : "v3.2.0",
         flexbox              : "1.0.0",//弹性布局
-        wheelview            : "4.1.0",//选择控件
-        design               : "27.1.1"
+        wheelview            : "4.1.0",//选择控件  没在用，用的是本地module
+        design               : "27.1.1",
+        LegeBase             : "1.0.2.44",
+        CommonView           : "1.0.5",
+        PickerView           : "4.1.9",
+        circularFloatMenu    : "1.0.2",//弧形展开菜单
+        realtimeblurview     : "1.2.1",//高斯模糊
+        frameanimation       : "2.3.5",//用TextureView或SurfaceView 高性能播放帧动画，避免在很多帧的情况下使用AnimationDrawable带来的OOM和卡顿问题。
+        banner               : "2.7.4",//轮播组件
+        lottie               : "2.7.0",//lottie js动画   勿升级，2.8.0及以上只适用于Android X
+        utilcode             : "1.30.1",//工具类库 https://github.com/Blankj/AndroidUtilCode
+        tkrefreshlayout      : "1.0.7",// 支持回弹的下拉刷新控件 https://github.com/lcodecorex/TwinklingRefreshLayout
+        viewanimator      : "1.1.0",// 控件动画效果库https://github.com/florent37/ViewAnimator
 ]
 
 ext.libs = [
+        viewanimator        : "com.github.florent37:viewanimator:${versions.viewanimator}",
+        tkrefreshlayout        : "com.lcodecorex:tkrefreshlayout:${versions.tkrefreshlayout}",
+        lottie                 : "com.airbnb.android:lottie:${versions.lottie}",
+        utilcode               : "com.blankj:utilcode:${versions.utilcode}",
+        banner                 : "com.zhpan.library:bannerview:${versions.banner}",
+        realtimeblurview       : "com.github.mmin18:realtimeblurview:${versions.realtimeblurview}",
+        circularFloatMenu      : "com.oguzdev:CircularFloatingActionMenu:${versions.circularFloatMenu}",
+        PickerView             : "com.contrarywind:Android-PickerView:${versions.PickerView}",
+        CommonView             : "com.github.zhonghaojie:CommonView:${versions.CommonView}",
+        LegeBase               : "com.github.zhonghaojie:LegeBase:${versions.LegeBase}",
+
         // Google 提供的
         support_annotations    : "com.android.support:support-annotations:${versions.support_lib}",
         support_v4             : "com.android.support:support-v4:${versions.support_lib}",
@@ -72,7 +94,6 @@ ext.libs = [
         cardview               : "com.android.support:cardview-v7:${versions.support_lib}",
         palette                : "com.android.support:palette-v7:${versions.support_lib}",
         constraintLayout       : "com.android.support.constraint:constraint-layout:${versions.constraintLayout}",
-        design                 : "com.android.support:design:${versions.support_lib}",
         rxjava                 : "io.reactivex.rxjava2:rxjava:${versions.rxjava}",
         rxandroid              : "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}",
         junit                  : "junit:junit:${versions.junit}",
@@ -80,13 +101,14 @@ ext.libs = [
         test_espresso          : "com.android.support.test.espresso:espresso-core:${versions.test_espresso}",
         design                 : "com.android.support:design:${versions.design}",
         //第三方
+        frameanimation         : "com.yuyashuai.frameanimation:frameanimation:${versions.frameanimation}",
         wheelview              : "com.contrarywind:wheelview:${versions.wheelview}",
         toast                  : "com.hjq:toast:${versions.toast}",
         statusbaruitl          : "com.jaeger.statusbaruitl:library:${versions.statusbaruitl}",
         retrofit2              : "com.squareup.retrofit2:retrofit:${versions.retrofit2}",
         retrofit_converter     : "com.squareup.retrofit2:retrofit-converters:${versions.retrofit2}",
         converter_scalars      : "com.squareup.retrofit2:converter-scalars:${versions.retrofit2}",
-        converter_gson          : "com.squareup.retrofit2:converter-gson:${versions.retrofit2}",
+        converter_son          : "com.squareup.retrofit2:converter-gson:${versions.retrofit2}",
         fragmentation          : "me.yokeyword:fragmentation:${versions.fragmentation}",
         fragmentation_swipeback: "me.yokeyword:fragmentation-swipeback:${versions.fragmentation}",
         fastjson               : "com.alibaba:fastjson:${versions.fastjson}",
