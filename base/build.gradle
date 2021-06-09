@@ -64,6 +64,7 @@ dependencies {
     api libs.retrofit_converter
     api libs.converter_scalars
     api libs.converter_son
+    api libs.utilcode
 
     api libs.design
     api libs.eventbus
