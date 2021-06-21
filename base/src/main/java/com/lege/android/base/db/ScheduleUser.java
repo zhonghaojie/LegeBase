@@ -28,6 +28,33 @@ public class ScheduleUser {
     private int tag;
     private int is_delete;
     private String human_date;
+    private String type_id;
+    private String trip_info;
+    private String trip_id;
+
+    public String getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(String type_id) {
+        this.type_id = type_id;
+    }
+
+    public String getTrip_info() {
+        return trip_info;
+    }
+
+    public void setTrip_info(String trip_info) {
+        this.trip_info = trip_info;
+    }
+
+    public String getTrip_id() {
+        return trip_id;
+    }
+
+    public void setTrip_id(String trip_id) {
+        this.trip_id = trip_id;
+    }
 
     public String getRemark() {
         return remark;
@@ -157,12 +184,13 @@ public class ScheduleUser {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 1802842088)
+    @Generated(hash = 1725706348)
     public ScheduleUser(Long id, int scheduleid, String startdate,
             String starttime, String enddate, String endtime, String title,
             int is_allday, String alert, String readed, String isReminded,
             String time, String remark, Long add_time, int user_id,
-            String device_sn, int tag, int is_delete, String human_date) {
+            String device_sn, int tag, int is_delete, String human_date,
+            String type_id, String trip_info, String trip_id) {
         this.id = id;
         this.scheduleid = scheduleid;
         this.startdate = startdate;
@@ -182,6 +210,9 @@ public class ScheduleUser {
         this.tag = tag;
         this.is_delete = is_delete;
         this.human_date = human_date;
+        this.type_id = type_id;
+        this.trip_info = trip_info;
+        this.trip_id = trip_id;
     }
 
     @Generated(hash = 566555504)

@@ -43,6 +43,9 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         public final static Property Tag = new Property(16, int.class, "tag", false, "TAG");
         public final static Property Is_delete = new Property(17, int.class, "is_delete", false, "IS_DELETE");
         public final static Property Human_date = new Property(18, String.class, "human_date", false, "HUMAN_DATE");
+        public final static Property Type_id = new Property(19, String.class, "type_id", false, "TYPE_ID");
+        public final static Property Trip_info = new Property(20, String.class, "trip_info", false, "TRIP_INFO");
+        public final static Property Trip_id = new Property(21, String.class, "trip_id", false, "TRIP_ID");
     };
 
 
@@ -76,7 +79,10 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
                 "\"DEVICE_SN\" TEXT," + // 15: device_sn
                 "\"TAG\" INTEGER NOT NULL ," + // 16: tag
                 "\"IS_DELETE\" INTEGER NOT NULL ," + // 17: is_delete
-                "\"HUMAN_DATE\" TEXT);"); // 18: human_date
+                "\"HUMAN_DATE\" TEXT," + // 18: human_date
+                "\"TYPE_ID\" TEXT," + // 19: type_id
+                "\"TRIP_INFO\" TEXT," + // 20: trip_info
+                "\"TRIP_ID\" TEXT);"); // 21: trip_id
         // Add Indexes
         db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_SCHEDULE_USER_SCHEDULEID ON SCHEDULE_USER" +
                 " (\"SCHEDULEID\" ASC);");
@@ -166,6 +172,21 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         if (human_date != null) {
             stmt.bindString(19, human_date);
         }
+ 
+        String type_id = entity.getType_id();
+        if (type_id != null) {
+            stmt.bindString(20, type_id);
+        }
+ 
+        String trip_info = entity.getTrip_info();
+        if (trip_info != null) {
+            stmt.bindString(21, trip_info);
+        }
+ 
+        String trip_id = entity.getTrip_id();
+        if (trip_id != null) {
+            stmt.bindString(22, trip_id);
+        }
     }
 
     @Override
@@ -246,6 +267,21 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         if (human_date != null) {
             stmt.bindString(19, human_date);
         }
+ 
+        String type_id = entity.getType_id();
+        if (type_id != null) {
+            stmt.bindString(20, type_id);
+        }
+ 
+        String trip_info = entity.getTrip_info();
+        if (trip_info != null) {
+            stmt.bindString(21, trip_info);
+        }
+ 
+        String trip_id = entity.getTrip_id();
+        if (trip_id != null) {
+            stmt.bindString(22, trip_id);
+        }
     }
 
     @Override
@@ -274,7 +310,10 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // device_sn
             cursor.getInt(offset + 16), // tag
             cursor.getInt(offset + 17), // is_delete
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // human_date
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // human_date
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // type_id
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // trip_info
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21) // trip_id
         );
         return entity;
     }
@@ -300,6 +339,9 @@ public class ScheduleUserDao extends AbstractDao<ScheduleUser, Long> {
         entity.setTag(cursor.getInt(offset + 16));
         entity.setIs_delete(cursor.getInt(offset + 17));
         entity.setHuman_date(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setType_id(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setTrip_info(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setTrip_id(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
      }
     
     @Override
