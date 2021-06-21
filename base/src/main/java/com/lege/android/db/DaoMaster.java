@@ -21,52 +21,52 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        AlarmUserDao.createTable(db, ifNotExists);
-        ArticleHistoryBeanDao.createTable(db, ifNotExists);
-        AudioRecordUserDao.createTable(db, ifNotExists);
-        CollectionUserDao.createTable(db, ifNotExists);
-        EmailMessageUserDao.createTable(db, ifNotExists);
-        EmailUserDao.createTable(db, ifNotExists);
-        GlobalClockUserDao.createTable(db, ifNotExists);
-        MessageUserDao.createTable(db, ifNotExists);
-        MissedCallRecordUserDao.createTable(db, ifNotExists);
-        NewRemindUserDao.createTable(db, ifNotExists);
-        NewsUserDao.createTable(db, ifNotExists);
-        NoticeUserDao.createTable(db, ifNotExists);
         PlanUserDao.createTable(db, ifNotExists);
+        AlarmUserDao.createTable(db, ifNotExists);
+        NewRemindUserDao.createTable(db, ifNotExists);
+        WeatherUserDao.createTable(db, ifNotExists);
         RecentlyPlayedUserDao.createTable(db, ifNotExists);
-        ReminderUserDao.createTable(db, ifNotExists);
-        ScheduleUserDao.createTable(db, ifNotExists);
-        TaskBeanDao.createTable(db, ifNotExists);
         TipsHistoryBeanDao.createTable(db, ifNotExists);
         UserDao.createTable(db, ifNotExists);
+        MissedCallRecordUserDao.createTable(db, ifNotExists);
+        NewsUserDao.createTable(db, ifNotExists);
+        ReminderUserDao.createTable(db, ifNotExists);
+        ScheduleUserDao.createTable(db, ifNotExists);
+        NoticeUserDao.createTable(db, ifNotExists);
+        MessageUserDao.createTable(db, ifNotExists);
+        EmailMessageUserDao.createTable(db, ifNotExists);
+        CollectionUserDao.createTable(db, ifNotExists);
+        ArticleHistoryBeanDao.createTable(db, ifNotExists);
+        EmailUserDao.createTable(db, ifNotExists);
+        AudioRecordUserDao.createTable(db, ifNotExists);
+        GlobalClockUserDao.createTable(db, ifNotExists);
         WallpaperUserDao.createTable(db, ifNotExists);
-        WeatherUserDao.createTable(db, ifNotExists);
+        TaskBeanDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        AlarmUserDao.dropTable(db, ifExists);
-        ArticleHistoryBeanDao.dropTable(db, ifExists);
-        AudioRecordUserDao.dropTable(db, ifExists);
-        CollectionUserDao.dropTable(db, ifExists);
-        EmailMessageUserDao.dropTable(db, ifExists);
-        EmailUserDao.dropTable(db, ifExists);
-        GlobalClockUserDao.dropTable(db, ifExists);
-        MessageUserDao.dropTable(db, ifExists);
-        MissedCallRecordUserDao.dropTable(db, ifExists);
-        NewRemindUserDao.dropTable(db, ifExists);
-        NewsUserDao.dropTable(db, ifExists);
-        NoticeUserDao.dropTable(db, ifExists);
         PlanUserDao.dropTable(db, ifExists);
+        AlarmUserDao.dropTable(db, ifExists);
+        NewRemindUserDao.dropTable(db, ifExists);
+        WeatherUserDao.dropTable(db, ifExists);
         RecentlyPlayedUserDao.dropTable(db, ifExists);
-        ReminderUserDao.dropTable(db, ifExists);
-        ScheduleUserDao.dropTable(db, ifExists);
-        TaskBeanDao.dropTable(db, ifExists);
         TipsHistoryBeanDao.dropTable(db, ifExists);
         UserDao.dropTable(db, ifExists);
+        MissedCallRecordUserDao.dropTable(db, ifExists);
+        NewsUserDao.dropTable(db, ifExists);
+        ReminderUserDao.dropTable(db, ifExists);
+        ScheduleUserDao.dropTable(db, ifExists);
+        NoticeUserDao.dropTable(db, ifExists);
+        MessageUserDao.dropTable(db, ifExists);
+        EmailMessageUserDao.dropTable(db, ifExists);
+        CollectionUserDao.dropTable(db, ifExists);
+        ArticleHistoryBeanDao.dropTable(db, ifExists);
+        EmailUserDao.dropTable(db, ifExists);
+        AudioRecordUserDao.dropTable(db, ifExists);
+        GlobalClockUserDao.dropTable(db, ifExists);
         WallpaperUserDao.dropTable(db, ifExists);
-        WeatherUserDao.dropTable(db, ifExists);
+        TaskBeanDao.dropTable(db, ifExists);
     }
 
     /**
@@ -85,27 +85,27 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(AlarmUserDao.class);
-        registerDaoClass(ArticleHistoryBeanDao.class);
-        registerDaoClass(AudioRecordUserDao.class);
-        registerDaoClass(CollectionUserDao.class);
-        registerDaoClass(EmailMessageUserDao.class);
-        registerDaoClass(EmailUserDao.class);
-        registerDaoClass(GlobalClockUserDao.class);
-        registerDaoClass(MessageUserDao.class);
-        registerDaoClass(MissedCallRecordUserDao.class);
-        registerDaoClass(NewRemindUserDao.class);
-        registerDaoClass(NewsUserDao.class);
-        registerDaoClass(NoticeUserDao.class);
         registerDaoClass(PlanUserDao.class);
+        registerDaoClass(AlarmUserDao.class);
+        registerDaoClass(NewRemindUserDao.class);
+        registerDaoClass(WeatherUserDao.class);
         registerDaoClass(RecentlyPlayedUserDao.class);
-        registerDaoClass(ReminderUserDao.class);
-        registerDaoClass(ScheduleUserDao.class);
-        registerDaoClass(TaskBeanDao.class);
         registerDaoClass(TipsHistoryBeanDao.class);
         registerDaoClass(UserDao.class);
+        registerDaoClass(MissedCallRecordUserDao.class);
+        registerDaoClass(NewsUserDao.class);
+        registerDaoClass(ReminderUserDao.class);
+        registerDaoClass(ScheduleUserDao.class);
+        registerDaoClass(NoticeUserDao.class);
+        registerDaoClass(MessageUserDao.class);
+        registerDaoClass(EmailMessageUserDao.class);
+        registerDaoClass(CollectionUserDao.class);
+        registerDaoClass(ArticleHistoryBeanDao.class);
+        registerDaoClass(EmailUserDao.class);
+        registerDaoClass(AudioRecordUserDao.class);
+        registerDaoClass(GlobalClockUserDao.class);
         registerDaoClass(WallpaperUserDao.class);
-        registerDaoClass(WeatherUserDao.class);
+        registerDaoClass(TaskBeanDao.class);
     }
 
     public DaoSession newSession() {

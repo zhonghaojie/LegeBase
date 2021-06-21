@@ -136,12 +136,25 @@
 	<color name="color_666">#666666</color>
 
 
+    <color name="white_5">#0dffffff</color>
+    <color name="white_10">#1affffff</color>
+    <color name="white_15">#26ffffff</color>
+    <color name="white_20">#33ffffff</color>
+    <color name="white_25">#40ffffff</color>
     <color name="white_30">#4Dffffff</color>
+    <color name="white_35">#59ffffff</color>
+    <color name="white_40">#66ffffff</color>
+    <color name="white_45">#73ffffff</color>
     <color name="white_50">#80ffffff</color>
-    <color name="white_10">#22ffffff</color>
-    <color name="white_60">#81ffffff</color>
+    <color name="white_55">#8cffffff</color>
+    <color name="white_60">#99ffffff</color>
+    <color name="white_65">#a6ffffff</color>
     <color name="white_70">#B3ffffff</color>
-    <color name="white_80">#B4ffffff</color>
+    <color name="white_75">#bfffffff</color>
+    <color name="white_80">#ccffffff</color>
+    <color name="white_85">#d9ffffff</color>
+    <color name="white_90">#e6ffffff</color>
+    <color name="white_95">#f2ffffff</color>
     <color name="color_line_54">#545458</color>
 	<color name="color_helper_bg">#152239</color>
 	<color name="white_8p">#14FFFFFF</color>
