@@ -9,7 +9,7 @@ import com.lege.android.base.PreferencesManager
  */
 open class ThemeAndScreenManager() {
     companion object {
-        private val pm = PreferencesManager.getInstance()
+        val pm = PreferencesManager.getInstance()
 
         @JvmStatic
         val instance = ThemeAndScreenManager()
@@ -94,25 +94,6 @@ open class ThemeAndScreenManager() {
     }
 
 
-    //儿童模式智控风格
-    var childStyle: Int
-        get() {
-            val oldValue = pm.getStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_BOY)
-            if (oldValue == CHILD_DEVICE_CONTROL_STYLE_BOY) {
-                return CHILDREN_DEVICE_CONTROL_THEME_BOY
-            } else {
-                return CHILDREN_DEVICE_CONTROL_THEME_GIRL
-            }
-
-        }
-        set(value) {
-            if (value == CHILDREN_DEVICE_CONTROL_THEME_BOY) {
-                pm.saveStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_BOY)
-            } else {
-                pm.saveStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_GIRL)
-            }
-
-        }
 
     //首页内容主题时，内容的切换间隔
     var homeContentChangeTime: Int
