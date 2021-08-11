@@ -37,11 +37,6 @@ open class ThemeAndScreenManager() {
         const val SP_FLIP_CLOCK = 3 // 翻页时钟
         const val SP_ALBUM = 4//家庭相册
 
-
-        //儿童模式智控风格
-        const val CHILD_DEVICE_CONTROL_STYLE_BOY = "boy"
-        const val CHILD_DEVICE_CONTROL_STYLE_GIRL = "girl"
-
         //电子时钟
         const val SCREEN_CLOCK_CARTOON = "screen_clock_cartoon"
         const val SCREEN_CLOCK_FLIP = "screen_clock_flip"
