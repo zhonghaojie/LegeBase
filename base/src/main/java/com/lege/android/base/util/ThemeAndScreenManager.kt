@@ -1,41 +1,42 @@
 package com.lege.android.base.util
 
 
-import android.content.Context
-import com.lege.android.base.BaseApp
 import com.lege.android.base.PreferencesManager
-import com.lege.android.base.constants.SettingConstant
-import com.lege.android.base.data.EventUpdateControlStyle
-import org.greenrobot.eventbus.EventBus
 
 /**
  * Description:主题和屏保管理类
  * Created by loctek on 2020/7/9.
  */
-class ThemeAndScreenManager() {
+open class ThemeAndScreenManager() {
     companion object {
+        private val pm = PreferencesManager.getInstance()
+
         @JvmStatic
         val instance = ThemeAndScreenManager()
 
-        //选择智控主题的风格
-        const val THEME_DEVICE_CONTROL = 0
-        const val THEME_CONTENT = 1
+        //region 智控主题子主题
+        const val THEME_DEVICE_CONTROL_SIMPLE = 0 // 极简智控
+        const val THEME_DEVICE_CONTROL_MAN = 1 // 智控男
+        const val THEME_DEVICE_CONTROL_WOMAN = 2//智控女
+        const val THEME_DEVICE_CONTROL_TEA_TABLE = 4//茶几
+        const val THEME_DEVICE_CONTROL_BEDSIDE_CUPBOARD = 5//床头柜
+        //endregion
 
-        const val SCREEN_PROTECT_STYLE_PICTURE = 0//图库相册
-        const val SCREEN_PROTECT_STYLE_CONTENT = 1//内容资讯
-        const val SCREEN_PROTECT_STYLE_E_CLOCK = 2//电子时钟
-
-
-        //智控主题的风格id
-        const val DEVICE_CONTROL_STYLE_ID_MAN = "device_control_style_man"
-        const val DEVICE_CONTROL_STYLE_ID_WOMAN = "device_control_style_woman"
-        const val DEVICE_CONTROL_STYLE_ID_CHILD = "device_control_style_child"
-        const val DEVICE_CONTROL_STYLE_ID_SIMPLE = "device_control_style_simple"//智控极简风格
+        //region 主题大类
+        const val THEME_CONTENT_NEWS = 3//内容资讯
+        const val THEME_DEVICE_CONTROL = 4 //智控主题
+        //endregion
 
 
-        const val DEVICE_CONTROL_STYLE_SIT_REMIND = "device_control_style_sit_remind"
-        const val DEVICE_CONTROL_STYLE_SIT_REMIND_WOMAN = "device_control_style_sit_remind_woman"
-        const val DEVICE_CONTROL_STYLE_ID_OTHER = "other"
+        const val CHILDREN_DEVICE_CONTROL_THEME_BOY = 1
+        const val CHILDREN_DEVICE_CONTROL_THEME_GIRL = 2
+
+        const val SP_NO_SCREEN_PROTECT = -1 //无
+        const val SP_CARTOON_CLOCK = 1 //卡通时钟
+        const val SP_ELECTRIC_CLOCK = 2//电子时钟
+        const val SP_FLIP_CLOCK = 3 // 翻页时钟
+        const val SP_ALBUM = 4//家庭相册
+
 
         //儿童模式智控风格
         const val CHILD_DEVICE_CONTROL_STYLE_BOY = "boy"
@@ -47,32 +48,70 @@ class ThemeAndScreenManager() {
         const val SCREEN_CLOCK_DIAL = "screen_clock_dial"
     }
 
-    private val pm = PreferencesManager.getInstance()
-    var theme: Int
-        //主题  0智控   1内容
+    init {
+        fixTheme()
+    }
+
+    //首页主题
+    var mTheme: Int
         get() {
-            return pm.getIntegerResults("theme", THEME_CONTENT)
+            return pm.getIntegerResults("home_theme", THEME_DEVICE_CONTROL)
         }
         set(value) {
-            pm.saveIntegerResults("theme", value)
+            pm.saveIntegerResults("home_theme", value)
         }
 
-    //主题风格id
-    var themeStyleID: String
+    //智控主题
+    var deviceControlTheme :Int
         get() {
-            return pm.getStringResults("themeStyleID", DEVICE_CONTROL_STYLE_ID_SIMPLE)
+            return pm.getIntegerResults("deviceControlTheme", THEME_DEVICE_CONTROL_SIMPLE)
         }
         set(value) {
-            pm.saveStringResults("themeStyleID", value)
-            EventBus.getDefault().postSticky(EventUpdateControlStyle())
+            pm.saveIntegerResults("deviceControlTheme", value)
         }
+
+    //废弃theme字段，改用home_theme
+    fun fixTheme() {
+        if (pm.getIntegerResults("theme", 1) == -1) {
+            return
+        }
+        if (pm.getIntegerResults("theme", 1) == 1) {
+            mTheme = THEME_CONTENT_NEWS
+            pm.saveIntegerResults("theme", -1)
+        } else if (pm.getIntegerResults("theme", 1) == 0) {
+            mTheme = THEME_DEVICE_CONTROL
+            if (pm.getStringResults("themeStyleID", "device_control_style_simple") == "device_control_style_simple") {
+                deviceControlTheme = THEME_DEVICE_CONTROL_SIMPLE
+                pm.saveIntegerResults("theme", -1)
+            } else if (pm.getStringResults("themeStyleID", "device_control_style_simple") == "device_control_style_woman") {
+                deviceControlTheme = THEME_DEVICE_CONTROL_WOMAN
+                pm.saveIntegerResults("theme", -1)
+            } else if (pm.getStringResults("themeStyleID", "device_control_style_simple") == "device_control_style_man") {
+                deviceControlTheme = THEME_DEVICE_CONTROL_MAN
+                pm.saveIntegerResults("theme", -1)
+            }
+        }
+    }
+
+
     //儿童模式智控风格
-    var childStyle:String
+    var childStyle: Int
         get() {
-            return pm.getStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_BOY)
+            val oldValue = pm.getStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_BOY)
+            if (oldValue == CHILD_DEVICE_CONTROL_STYLE_BOY) {
+                return CHILDREN_DEVICE_CONTROL_THEME_BOY
+            } else {
+                return CHILDREN_DEVICE_CONTROL_THEME_GIRL
+            }
+
         }
         set(value) {
-            pm.saveStringResults("childStyle", value)
+            if (value == CHILDREN_DEVICE_CONTROL_THEME_BOY) {
+                pm.saveStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_BOY)
+            } else {
+                pm.saveStringResults("childStyle", CHILD_DEVICE_CONTROL_STYLE_GIRL)
+            }
+
         }
 
     //首页内容主题时，内容的切换间隔
@@ -93,14 +132,6 @@ class ThemeAndScreenManager() {
             pm.saveBooleanResults("screenProtectSwitch", value)
         }
 
-    //屏保为内容资讯时，内容的切换间隔
-    var screenSaverContentChangeTime: Int
-        get() {
-            return pm.getIntegerResults("screenSaverContentChangeTime", 1)
-        }
-        set(value) {
-            pm.saveIntegerResults("screenSaverContentChangeTime", value)
-        }
 
     //整点报时开关
     var integerTimeProtect: Boolean
@@ -123,7 +154,7 @@ class ThemeAndScreenManager() {
     //屏保样式
     var screenProtectSelected: Int
         get() {
-            return pm.getIntegerResults("screenProtect", SCREEN_PROTECT_STYLE_E_CLOCK)
+            return pm.getIntegerResults("screenProtect", SP_ELECTRIC_CLOCK)
         }
         set(value) {
             pm.saveIntegerResults("screenProtect", value)
@@ -137,4 +168,5 @@ class ThemeAndScreenManager() {
         set(value) {
             pm.saveIntegerResults("screenProtectStartTime", value)
         }
+
 }
