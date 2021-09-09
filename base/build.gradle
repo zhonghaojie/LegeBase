@@ -76,5 +76,4 @@ dependencies {
     api libs.okhttp311
     api libs.okhttp311_urlconnection
     api libs.recyclerview
-    implementation libs.CommonView
 }
