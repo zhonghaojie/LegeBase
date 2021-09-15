@@ -16,6 +16,7 @@ public class AlarmUser {
     private int skip_holiday;
     private String startdate;
     private String tag;
+    private int type;
     public String getStartdate() {
         return this.startdate;
     }
@@ -70,10 +71,16 @@ public class AlarmUser {
     public void setSkip_holiday(int skip_holiday) {
         this.skip_holiday = skip_holiday;
     }
-    @Generated(hash = 1455011809)
+    public int getType() {
+        return this.type;
+    }
+    public void setType(int type) {
+        this.type = type;
+    }
+    @Generated(hash = 1169194162)
     public AlarmUser(Long id, int alarmid, String time, String repeat,
             String ringingid, int isStart, int skip_holiday, String startdate,
-            String tag) {
+            String tag, int type) {
         this.id = id;
         this.alarmid = alarmid;
         this.time = time;
@@ -83,6 +90,7 @@ public class AlarmUser {
         this.skip_holiday = skip_holiday;
         this.startdate = startdate;
         this.tag = tag;
+        this.type = type;
     }
     @Generated(hash = 1160523540)
     public AlarmUser() {

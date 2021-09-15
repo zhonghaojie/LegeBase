@@ -33,6 +33,7 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         public final static Property Skip_holiday = new Property(6, int.class, "skip_holiday", false, "SKIP_HOLIDAY");
         public final static Property Startdate = new Property(7, String.class, "startdate", false, "STARTDATE");
         public final static Property Tag = new Property(8, String.class, "tag", false, "TAG");
+        public final static Property Type = new Property(9, int.class, "type", false, "TYPE");
     };
 
 
@@ -56,7 +57,8 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
                 "\"IS_START\" INTEGER NOT NULL ," + // 5: isStart
                 "\"SKIP_HOLIDAY\" INTEGER NOT NULL ," + // 6: skip_holiday
                 "\"STARTDATE\" TEXT," + // 7: startdate
-                "\"TAG\" TEXT);"); // 8: tag
+                "\"TAG\" TEXT," + // 8: tag
+                "\"TYPE\" INTEGER NOT NULL );"); // 9: type
     }
 
     /** Drops the underlying database table. */
@@ -101,6 +103,7 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         if (tag != null) {
             stmt.bindString(9, tag);
         }
+        stmt.bindLong(10, entity.getType());
     }
 
     @Override
@@ -139,6 +142,7 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         if (tag != null) {
             stmt.bindString(9, tag);
         }
+        stmt.bindLong(10, entity.getType());
     }
 
     @Override
@@ -157,7 +161,8 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
             cursor.getInt(offset + 5), // isStart
             cursor.getInt(offset + 6), // skip_holiday
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // startdate
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // tag
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // tag
+            cursor.getInt(offset + 9) // type
         );
         return entity;
     }
@@ -173,6 +178,7 @@ public class AlarmUserDao extends AbstractDao<AlarmUser, Long> {
         entity.setSkip_holiday(cursor.getInt(offset + 6));
         entity.setStartdate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setTag(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setType(cursor.getInt(offset + 9));
      }
     
     @Override

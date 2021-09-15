@@ -1,6 +1,8 @@
 package com.lege.android.base.retrofit
 
 import android.util.Log
+import android.webkit.WebSettings
+import com.lege.android.base.BaseApp
 import com.lege.android.base.wifi.WifiHelper
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +19,22 @@ class BaseRetrofit {
         @JvmStatic
         val retrofit: Retrofit by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             createRetrofit()
+        }
+
+        /**
+         * 设置头
+         */
+        private fun addHeaderInterceptor(): Interceptor {
+            return Interceptor { chain ->
+                val originalRequest = chain.request()
+                val requestBuilder = originalRequest.newBuilder()
+                    // Provide your custom header here
+                    .removeHeader("User-Agent")//移除旧的
+                    .addHeader("User-Agent", WebSettings.getDefaultUserAgent(BaseApp.getAppContext()))
+                    .method(originalRequest.method(), originalRequest.body())
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
         }
 
         @JvmStatic
