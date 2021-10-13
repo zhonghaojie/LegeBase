@@ -23,6 +23,12 @@ public class PlanUser {
     private int is_delete;
     private int user_id;
     private Long add_time;
+    private int color;
+    private String desc;
+    private String done_desc;
+    private String done_time;
+    private int is_sign;
+    private String title;
 
     public String getHuman_date() {
         return human_date;
@@ -102,10 +108,59 @@ public class PlanUser {
     public void setStatus(int status) {
         this.status = status;
     }
-    @Generated(hash = 1976902049)
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getIs_sign() {
+        return this.is_sign;
+    }
+
+    public void setIs_sign(int is_sign) {
+        this.is_sign = is_sign;
+    }
+
+    public String getDone_time() {
+        return this.done_time;
+    }
+
+    public void setDone_time(String done_time) {
+        this.done_time = done_time;
+    }
+
+    public String getDone_desc() {
+        return this.done_desc;
+    }
+
+    public void setDone_desc(String done_desc) {
+        this.done_desc = done_desc;
+    }
+
+    public String getDesc() {
+        return this.desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public int getColor() {
+        return this.color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+    @Generated(hash = 1933310235)
     public PlanUser(Long id, int taskid, String subject, String duedate, int status,
             String human_date, String device_sn, int tag, int is_delete, int user_id,
-            Long add_time) {
+            Long add_time, int color, String desc, String done_desc, String done_time,
+            int is_sign, String title) {
         this.id = id;
         this.taskid = taskid;
         this.subject = subject;
@@ -117,6 +172,12 @@ public class PlanUser {
         this.is_delete = is_delete;
         this.user_id = user_id;
         this.add_time = add_time;
+        this.color = color;
+        this.desc = desc;
+        this.done_desc = done_desc;
+        this.done_time = done_time;
+        this.is_sign = is_sign;
+        this.title = title;
     }
 
     @Generated(hash = 2114241025)
