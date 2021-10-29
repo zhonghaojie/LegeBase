@@ -4,9 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.view.MotionEvent
 import android.view.View
 import com.hjq.toast.ToastUtils
@@ -233,9 +233,9 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
      */
     open fun doBluetoothPermission() {}
 
-    protected var currentFrg: Fragment? = null
+    protected var currentFrg: androidx.fragment.app.Fragment? = null
 
-    protected open fun showFragment(id: Int, fragment: Fragment?) {
+    protected open fun showFragment(id: Int, fragment: androidx.fragment.app.Fragment?) {
         if (fragment == null) {
             return
         }
@@ -243,7 +243,7 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
         val ft = fm.beginTransaction()
         if (currentFrg !== fragment) {
             if (currentFrg != null) {
-                ft.hide(currentFrg)
+                ft.hide(currentFrg!!)
             }
             if (fragment.isAdded) {
                 ft.show(fragment).commit()

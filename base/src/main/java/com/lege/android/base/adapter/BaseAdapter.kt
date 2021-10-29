@@ -1,7 +1,7 @@
 package com.lege.android.base.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import android.view.ViewGroup
  */
 
 
-abstract class BaseAdapter<T>(var datas: MutableList<T>, protected val context: Context) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapter<T>(var datas: MutableList<T>, protected val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<BaseViewHolder>() {
     interface OnItemClickListener<T> {
         fun onItemClick(position: Int, data: T)
     }
@@ -47,5 +47,5 @@ abstract class BaseAdapter<T>(var datas: MutableList<T>, protected val context: 
     abstract fun bindData(holder: BaseViewHolder, data: T, position: Int)
 }
 
-class BaseViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+class BaseViewHolder(val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
 }

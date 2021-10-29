@@ -1,12 +1,10 @@
 package com.lege.android.base.ui;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ActivityUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

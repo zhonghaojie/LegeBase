@@ -1,7 +1,7 @@
 package com.lege.android.base.ui
 
 import android.app.Activity
-import android.support.annotation.Nullable
+import androidx.annotation.Nullable
 
 /**
  * Description:
