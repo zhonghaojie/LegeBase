@@ -35,6 +35,12 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         public final static Property Is_delete = new Property(8, int.class, "is_delete", false, "IS_DELETE");
         public final static Property User_id = new Property(9, int.class, "user_id", false, "USER_ID");
         public final static Property Add_time = new Property(10, Long.class, "add_time", false, "ADD_TIME");
+        public final static Property Color = new Property(11, int.class, "color", false, "COLOR");
+        public final static Property Desc = new Property(12, String.class, "desc", false, "DESC");
+        public final static Property Done_desc = new Property(13, String.class, "done_desc", false, "DONE_DESC");
+        public final static Property Done_time = new Property(14, String.class, "done_time", false, "DONE_TIME");
+        public final static Property Is_sign = new Property(15, int.class, "is_sign", false, "IS_SIGN");
+        public final static Property Title = new Property(16, String.class, "title", false, "TITLE");
     };
 
 
@@ -60,7 +66,13 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
                 "\"TAG\" INTEGER NOT NULL ," + // 7: tag
                 "\"IS_DELETE\" INTEGER NOT NULL ," + // 8: is_delete
                 "\"USER_ID\" INTEGER NOT NULL ," + // 9: user_id
-                "\"ADD_TIME\" INTEGER);"); // 10: add_time
+                "\"ADD_TIME\" INTEGER," + // 10: add_time
+                "\"COLOR\" INTEGER NOT NULL ," + // 11: color
+                "\"DESC\" TEXT," + // 12: desc
+                "\"DONE_DESC\" TEXT," + // 13: done_desc
+                "\"DONE_TIME\" TEXT," + // 14: done_time
+                "\"IS_SIGN\" INTEGER NOT NULL ," + // 15: is_sign
+                "\"TITLE\" TEXT);"); // 16: title
         // Add Indexes
         db.execSQL("CREATE UNIQUE INDEX " + constraint + "IDX_PLAN_USER_TASKID ON PLAN_USER" +
                 " (\"TASKID\" ASC);");
@@ -110,6 +122,28 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         if (add_time != null) {
             stmt.bindLong(11, add_time);
         }
+        stmt.bindLong(12, entity.getColor());
+ 
+        String desc = entity.getDesc();
+        if (desc != null) {
+            stmt.bindString(13, desc);
+        }
+ 
+        String done_desc = entity.getDone_desc();
+        if (done_desc != null) {
+            stmt.bindString(14, done_desc);
+        }
+ 
+        String done_time = entity.getDone_time();
+        if (done_time != null) {
+            stmt.bindString(15, done_time);
+        }
+        stmt.bindLong(16, entity.getIs_sign());
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(17, title);
+        }
     }
 
     @Override
@@ -150,6 +184,28 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         if (add_time != null) {
             stmt.bindLong(11, add_time);
         }
+        stmt.bindLong(12, entity.getColor());
+ 
+        String desc = entity.getDesc();
+        if (desc != null) {
+            stmt.bindString(13, desc);
+        }
+ 
+        String done_desc = entity.getDone_desc();
+        if (done_desc != null) {
+            stmt.bindString(14, done_desc);
+        }
+ 
+        String done_time = entity.getDone_time();
+        if (done_time != null) {
+            stmt.bindString(15, done_time);
+        }
+        stmt.bindLong(16, entity.getIs_sign());
+ 
+        String title = entity.getTitle();
+        if (title != null) {
+            stmt.bindString(17, title);
+        }
     }
 
     @Override
@@ -170,7 +226,13 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
             cursor.getInt(offset + 7), // tag
             cursor.getInt(offset + 8), // is_delete
             cursor.getInt(offset + 9), // user_id
-            cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10) // add_time
+            cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10), // add_time
+            cursor.getInt(offset + 11), // color
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // desc
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // done_desc
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // done_time
+            cursor.getInt(offset + 15), // is_sign
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16) // title
         );
         return entity;
     }
@@ -188,6 +250,12 @@ public class PlanUserDao extends AbstractDao<PlanUser, Long> {
         entity.setIs_delete(cursor.getInt(offset + 8));
         entity.setUser_id(cursor.getInt(offset + 9));
         entity.setAdd_time(cursor.isNull(offset + 10) ? null : cursor.getLong(offset + 10));
+        entity.setColor(cursor.getInt(offset + 11));
+        entity.setDesc(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setDone_desc(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setDone_time(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setIs_sign(cursor.getInt(offset + 15));
+        entity.setTitle(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
      }
     
     @Override
