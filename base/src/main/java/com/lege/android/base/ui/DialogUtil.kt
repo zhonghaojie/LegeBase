@@ -20,40 +20,46 @@ import java.util.*
 object DialogUtil {
 
 
+
     @JvmStatic
-    fun showCustomDialog(context: Context,
-                         title: String,
-                         content: String,
-                         cancelText: String = "取消",
-                         okText: String = "确定",
-                         onCancel: (d: DialogInterface) -> Unit,
-                         onOk: (d: DialogInterface) -> Unit,
-                         onDismiss: (() -> Unit)? = null, isGoneTopIcon: Boolean = false) {
-        val dialogview = LayoutInflater.from(context).inflate(R.layout.layout_custom_dialog, null)
+    fun showConfirmDialog(
+        context: Context,
+        title: String,
+        content: String = "",
+        cancelText: String = "取消",
+        okText: String = "确定",
+        onCancel: (d: DialogInterface) -> Unit,
+        onOk: (d: DialogInterface) -> Unit,
+        onDismiss: (() -> Unit)? = null, isGoneTopIcon: Boolean = false, topIcon: Int = -1
+    ) {
+        val dialogview = LayoutInflater.from(context).inflate(R.layout.layout_setting_popup, null)
         val width = context.resources.getDimensionPixelOffset(R.dimen.x620)
         val height = context.resources.getDimensionPixelOffset(R.dimen.x340)
         dialogview?.let {
             val tvTitle = it.findViewById<TextView>(R.id.tv_title)
             val tvContent = it.findViewById<TextView>(R.id.tv_content)
             val ivTopIcon = it.findViewById<ImageView>(R.id.img_setup)
-//            if (isGoneTopIcon) {
-//                ivTopIcon.visibility = View.GONE
-//            } else {
-//                ivTopIcon.visibility = View.VISIBLE
-//            }
+            if (isGoneTopIcon) {
+                ivTopIcon.visibility = View.GONE
+            } else {
+                if (topIcon != -1) {
+                    ivTopIcon.setImageResource(topIcon)
+                }
+                ivTopIcon.visibility = View.VISIBLE
+            }
             tvTitle.text = title
-//            tvContent.text = content
-//            if (content.isEmpty()) {
-//                tvContent.visibility = View.GONE
-//            }
+            tvContent.text = content
+            if (content.isEmpty()) {
+                tvContent.visibility = View.GONE
+            }
             val canclebtn = it.findViewById<TextView>(R.id.tv_refuse)
             canclebtn.text = cancelText
             val btnOk = it.findViewById<TextView>(R.id.tv_allow)
             btnOk.text = okText
             val dialog = AlertDialog.Builder(context)
-                    .setView(dialogview)
-                    .setCancelable(true)
-                    .create()
+                .setView(dialogview)
+                .setCancelable(true)
+                .create()
             dialog.setOnDismissListener {
                 onDismiss?.invoke()
             }
@@ -69,7 +75,7 @@ object DialogUtil {
             val window = dialog.window
             val lp = window.attributes
             lp.width = width
-            lp.height = height
+            lp.width = height
             lp.windowAnimations = R.style.statusbar_pop_animation
             lp.dimAmount = 0.75f
             window.attributes = lp
