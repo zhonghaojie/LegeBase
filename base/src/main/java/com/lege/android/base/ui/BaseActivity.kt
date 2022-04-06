@@ -87,6 +87,7 @@ open class BaseActivity : SupportActivity(), SwipeBackActivityBase {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        setIntent(intent)
         APPLog.log(BASE_ACTIVITY_TAG, javaClass.simpleName + "   " + "onNewIntent")
     }
 
